@@ -12,9 +12,7 @@ public class MainSimulationController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         AnimationController animation = new AnimationController();
         TranslateTransition surfaceTransition = new TranslateTransition();
-        TranslateTransition backgroundTransition = new TranslateTransition(); 
-        
-
+        TranslateTransition backgroundTransition = new TranslateTransition();
     }
     
 }
