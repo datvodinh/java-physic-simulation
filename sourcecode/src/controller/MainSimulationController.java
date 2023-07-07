@@ -14,6 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Surface.Surface;
+import model.object.Cube;
+import model.object.Cylinder;
+
 
 public class MainSimulationController implements Initializable {
     
@@ -23,8 +26,6 @@ public class MainSimulationController implements Initializable {
     private Slider KSlider;
     @FXML
     private Slider SSlider;
-
-    private Surface surface = new Surface();
     private AnimationController animation;
     private SurfaceController surfaceController;
     private StatisticController statisticController;
@@ -45,15 +46,18 @@ public class MainSimulationController implements Initializable {
     private ImageView mainObject;
 
     @FXML
-    private DialogPane dialog;
+    private ImageView surface;
+
+    private Cube MainCube;
+    private Cylinder MainCylinder;
+    
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadStatistic();
         loadSurfacePanel();
-        dragDropController.initializeCube(cube,mainObject);
-        dragDropController.initializeCylinder(cylinder, mainObject);
-
+        
+        
 
 
     }
@@ -70,6 +74,7 @@ public class MainSimulationController implements Initializable {
             AnchorPane.setRightAnchor(statisticPane, 50.0);
 
             mainPane.getChildren().add(statisticPane);
+            this.statisticController = loader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,13 +99,6 @@ public class MainSimulationController implements Initializable {
         }
 
     }
-    
-    public void reset() {
-        System.out.println("ok");
-        loadStatistic();
-        loadSurfacePanel();
-        dragDropController.initializeCube(cube,mainObject);
-        dragDropController.initializeCylinder(cylinder,mainObject);
-    }
+
     
 }
