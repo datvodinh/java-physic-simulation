@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane alignment="CENTER_LEFT" maxHeight="245.0" maxWidth="279.0" minHeight="200.0" minWidth="180.0" opacity="0.95" prefHeight="245.0" prefWidth="279.0" style="-fx-background-color: #EDEADE; -fx-background-radius: 15;" stylesheets="@../../../../resources/css/checkboxStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticController">
+<StackPane alignment="CENTER_LEFT" maxHeight="300.0" maxWidth="279.0" minHeight="200.0" minWidth="180.0" opacity="0.95" prefHeight="300.0" prefWidth="279.0" style="-fx-background-color: #e6e6fa; -fx-background-radius: 15;" stylesheets="@../../../../resources/css/checkboxStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticController">
    <children>
       <Label fx:id="fArrowLabel" text="Friction Force" textAlignment="CENTER" visible="false">
          <font>
@@ -23,8 +23,8 @@
       </Label>
       <GridPane>
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.5999755859375" minWidth="10.0" prefWidth="162.999951171875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.20001220703125" minWidth="10.0" prefWidth="75.800048828125" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,13 +36,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <CheckBox fx:id="forceCheckBox" mnemonicParsing="false" onAction="#handleForceCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Forces" />
-            <CheckBox fx:id="sumForcesCheckBox" mnemonicParsing="false" onAction="#handleSumForcesCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Sum of Forces" GridPane.rowIndex="1" />
-            <CheckBox fx:id="valueCheckBox" mnemonicParsing="false" onAction="#handlValueCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Values" GridPane.rowIndex="2" />
-            <CheckBox fx:id="massCheckBox" mnemonicParsing="false" onAction="#handleMassCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Mass" GridPane.rowIndex="3" />
-            <CheckBox fx:id="velCheckBox" mnemonicParsing="false" onAction="#handleVelCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Velocity" GridPane.rowIndex="4" />
-            <CheckBox fx:id="accCheckBox" mnemonicParsing="false" onAction="#handleAccCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Acceleration" GridPane.rowIndex="5" />
-            <CheckBox fx:id="posCheckBox" mnemonicParsing="false" onAction="#handelPosCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Position" GridPane.rowIndex="6" />
+            <CheckBox fx:id="forceCheckBox" mnemonicParsing="false" onAction="#handleForceCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Forces">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="sumForcesCheckBox" mnemonicParsing="false" onAction="#handleSumForcesCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Sum of Forces" GridPane.rowIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="valueCheckBox" mnemonicParsing="false" onAction="#handlValueCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Values" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="massCheckBox" mnemonicParsing="false" onAction="#handleMassCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Mass" GridPane.rowIndex="3">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="velCheckBox" mnemonicParsing="false" onAction="#handleVelCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Velocity" GridPane.rowIndex="4">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="accCheckBox" mnemonicParsing="false" onAction="#handleAccCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Acceleration" GridPane.rowIndex="5">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="posCheckBox" mnemonicParsing="false" onAction="#handelPosCheckBox" stylesheets="@../../../../resources/css/checkboxStyle.css" text="Position" GridPane.rowIndex="6">
+               <font>
+                  <Font size="20.0" />
+               </font></CheckBox>
             <Label fx:id="velLabel" prefHeight="26.0" prefWidth="178.0" text="velLabel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
@@ -70,6 +91,6 @@
       <Insets />
    </opaqueInsets>
    <padding>
-      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </StackPane>
