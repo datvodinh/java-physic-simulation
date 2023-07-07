@@ -1,10 +1,9 @@
 package controller;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -13,8 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DataFormat;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
 import model.object.Cube;
@@ -22,17 +23,6 @@ import model.object.Cylinder;
 import model.object.MainObject;
 
 public class DragDropController {
-    @FXML
-    private GridPane grid;
-
-    @FXML
-    private ImageView cube;
-
-    @FXML
-    private ImageView cylinder;
-
-    @FXML
-    private ImageView myObj;
 
     private double xOffset;
     private double yOffset;
@@ -40,10 +30,13 @@ public class DragDropController {
     private double initialTranslateX;
     private double initialTranslateY;
 
+    double init_distance;
+    double end_distance;
 
 
-    @FXML
-    private void initializeCube() {
+
+
+    @FXML void initializeCube(ImageView cube, ImageView myObj) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
@@ -53,182 +46,181 @@ public class DragDropController {
 
         });
         cube.setOnMouseDragged(mouseEvent -> {
+            cube.setScaleX(1.5);
+            cube.setScaleY(1.5);
             cube.setTranslateX(mouseEvent.getSceneX() - xOffset);
             cube.setTranslateY(mouseEvent.getSceneY() - yOffset);
         });
         cube.setOnMouseReleased(mouseEvent -> {
+            cube.setScaleX(1);
+            cube.setScaleY(1);
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
 
-            cubeInput();
+            cubeInput(cube, myObj);
+            
             
             
         });
     }
 
     @FXML
-    private void initializeCylinder() {
+    void initializeCylinder(ImageView cylinder, ImageView myObj) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
             initialTranslateX = cylinder.getX();
             initialTranslateY = cylinder.getY();
-
         });
         cylinder.setOnMouseDragged(mouseEvent -> {
+            cylinder.setScaleX(1.5);
+            cylinder.setScaleY(1.5);
             cylinder.setTranslateX(mouseEvent.getSceneX() - xOffset);
             cylinder.setTranslateY(mouseEvent.getSceneY() - yOffset);
         });
         cylinder.setOnMouseReleased(mouseEvent -> {
+            cylinder.setScaleX(1);
+            cylinder.setScaleY(1);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
+            cylinderInput(cylinder, myObj);
 
-            cylinderInput();
-            
-            
         });
     }
 
-    private void cubeInput(){
+    private void cubeInput(ImageView cube, ImageView myObj) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-
-        dialog.initStyle(StageStyle.UNDECORATED);
-
+    
+        dialog.initStyle(StageStyle.DECORATED);
+    
         dialog.setTitle("Input Property for Cube");
         dialog.setHeaderText("Cube property");
-
-        ButtonType OKEType = new ButtonType("OK", ButtonData.OK_DONE);
-
-        dialog.getDialogPane().getButtonTypes().add(OKEType);
-
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
+    
+        ButtonType OKButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(OKButtonType);
+    
+        GridPane dialogGrid = new GridPane();
+        dialogGrid.setHgap(10);
+        dialogGrid.setVgap(10);
+        dialogGrid.setPadding(new Insets(20, 150, 10, 10));
+    
         TextField cubeMass = new TextField();
         cubeMass.setPromptText("Input mass for cube");
-
-
+    
         TextField cubeSide = new TextField();
-            
         cubeSide.setPromptText("Input side-length for cube");
-
-        // Node OKEButton = dialog.getDialogPane().lookupButton(OKEType);
-
-        Button OKEButton = new Button("OK");
-        // OKEButton.setDisable(true);
-
-        grid.add(new Label("Cube Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
-		grid.add(cubeMass, 1, 0);
-		grid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default "
-				+ Cube.MAX_SIZE * 0.3 + ")"), 0, 1);
-		grid.add(cubeSide, 1, 1);
-        grid.add(OKEButton,2,2);
-
-        int[] condition1 = { 0 };
-		int[] condition2 = { 0 };
-
-		cubeMass.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!cubeMass.getText().isEmpty()) {
-				condition1[0] = 1;
-			} else {
-				condition1[0] = 0;
-			}
-			OKEButton.setDisable(condition1[0] == 0 || condition2[0] == 0);
-		});
-
-		cubeSide.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!cubeSide.getText().isEmpty()) {
-				condition2[0] = 1;
-			} else {
-				condition2[0] = 0;
-			}
-			OKEButton.setDisable(condition1[0] == 0 || condition2[0] == 0);
-		});
-
-
-        OKEButton.setOnAction(event ->{
+    
+        Button OKButton = (Button) dialog.getDialogPane().lookupButton(OKButtonType);
+        OKButton.setDisable(true);
+    
+        dialogGrid.add(new Label("Cube Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
+        dialogGrid.add(cubeMass, 1, 0);
+        dialogGrid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default " + Cube.MAX_SIZE * 0.3 + ")"), 0, 1);
+        dialogGrid.add(cubeSide, 1, 1);
+        dialogGrid.add(OKButton, 2, 2);
+    
+        BooleanProperty condition1 = new SimpleBooleanProperty(false);
+        BooleanProperty condition2 = new SimpleBooleanProperty(false);
+    
+        cubeMass.textProperty().addListener((observable, oldValue, newValue) -> {
+            condition1.set(!cubeMass.getText().isEmpty());
+            OKButton.setDisable(!(condition1.get() && condition2.get()));
+        });
+    
+        cubeSide.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                double value = Double.parseDouble(cubeSide.getText());
+                condition2.set(!cubeSide.getText().isEmpty() && value >= Cube.MIN_SIZE && value <= Cube.MAX_SIZE);
+                OKButton.setDisable(!(condition1.get() && condition2.get()));
+            } catch (NumberFormatException e) {
+                condition2.set(false);
+                OKButton.setDisable(true);
+            }
+        });
+    
+        OKButton.setOnAction(event -> {
             try {
                 myObj.setImage(new Image("img/cube.png"));
-                grid.setVisible(false);
-
+                myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.3);
+                myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.3);
+                cube.setVisible(false);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
+                // Handle the exception accordingly (e.g., log or display an error message)
             }
         });
-
+    
+        dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+    
+        dialog.getDialogPane().setContent(dialogGrid);
+        dialog.showAndWait();
     }
 
-    private void cylinderInput(){
+    private void cylinderInput(ImageView cylinder, ImageView myObj) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
-        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.initStyle(StageStyle.DECORATED);
 
-        dialog.setTitle("Input Property for cylinder");
+        dialog.setTitle("Input Property for Cylinder");
         dialog.setHeaderText("Cylinder property");
-
-        ButtonType OKEType = new ButtonType("OK", ButtonData.OK_DONE);
-
-        dialog.getDialogPane().getButtonTypes().add(OKEType);
-
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField cubeMass = new TextField();
-        cubeMass.setPromptText("Input mass for cube");
-
-
-        TextField cubeSide = new TextField();
-            
-        cubeSide.setPromptText("Input side-length for cube");
-
-        // Node OKEButton = dialog.getDialogPane().lookupButton(OKEType);
-        Button OKEButton = new Button("OK");
-
-        OKEButton.setDisable(true);
-
-        grid.add(new Label("Cylinder Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
-		grid.add(cubeMass, 1, 0);
-		grid.add(new Label("Cylinde Radius: (>= " + Cylinder.MIN_RADIUS + " and <=" + Cylinder.MAX_RADIUS + ", default "
-				+ Cylinder.MAX_RADIUS * 0.3 + ")"), 0, 1);
-		grid.add(cubeSide, 1, 1);
-        grid.add(OKEButton,2,2);
-
-        int[] condition1 = { 0 };
-		int[] condition2 = { 0 };
-
-		cubeMass.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!cubeMass.getText().isEmpty()) {
-				condition1[0] = 1;
-			} else {
-				condition1[0] = 0;
-			}
-			OKEButton.setDisable(condition1[0] == 0 || condition2[0] == 0);
-		});
-
-		cubeSide.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!cubeSide.getText().isEmpty()) {
-				condition2[0] = 1;
-			} else {
-				condition2[0] = 0;
-			}
-			OKEButton.setDisable(condition1[0] == 0 || condition2[0] == 0);
-		});
-
-
-        OKEButton.setOnAction(event ->{
+    
+        // Set the color for the dialog
+        // dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        GridPane dialogGrid = new GridPane();
+        ButtonType OKButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(OKButtonType);
+    
+        dialogGrid.setHgap(10);
+        dialogGrid.setVgap(10);
+        dialogGrid.setPadding(new Insets(20, 150, 10, 10));
+    
+        TextField cylinderMass = new TextField();
+        cylinderMass.setPromptText("Input mass for cylinder");
+    
+        TextField cylinderRadius = new TextField();
+        cylinderRadius.setPromptText("Input radius for cylinder");
+    
+        Button OKButton = (Button) dialog.getDialogPane().lookupButton(OKButtonType);
+        OKButton.setDisable(true);
+        dialogGrid.add(new Label("Cylinder Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
+        dialogGrid.add(cylinderMass, 1, 0);
+        dialogGrid.add(new Label("Cylinder Radius: (>= " + Cylinder.MIN_RADIUS + " and <=" + Cylinder.MAX_RADIUS + ", default " + Cylinder.MAX_RADIUS * 0.3 + ")"), 0, 1);
+        dialogGrid.add(cylinderRadius, 1, 1);
+        dialogGrid.add(OKButton, 2, 2);
+    
+        BooleanProperty condition1 = new SimpleBooleanProperty(false);
+        BooleanProperty condition2 = new SimpleBooleanProperty(false);
+    
+        cylinderMass.textProperty().addListener((observable, oldValue, newValue) -> {
+            condition1.set(!cylinderMass.getText().isEmpty());
+            OKButton.setDisable(!(condition1.get() && condition2.get()));
+        });
+    
+        cylinderRadius.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                myObj.setImage(new Image("img/cylinder.png"));
-                grid.setVisible(false);
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
+                double value = Double.parseDouble(cylinderRadius.getText());
+                condition2.set(!cylinderRadius.getText().isEmpty() && value >= Cylinder.MIN_RADIUS && value <= Cylinder.MAX_RADIUS);
+                OKButton.setDisable(!(condition1.get() && condition2.get()));
+            } catch (NumberFormatException e) {
+                condition2.set(false);
+                OKButton.setDisable(true);
             }
         });
-
-
+    
+        OKButton.setOnAction(event -> {
+            try {
+                myObj.setImage(new Image("img/cylinder.png"));
+                myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.3);
+                myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.3);
+                cylinder.setVisible(false);
+            } catch (Exception e) {
+                // Handle the exception accordingly (e.g., log or display an error message)
+            }
+        });
+    
+        dialog.getDialogPane().setContent(dialogGrid);
+        dialog.showAndWait();
     }
+    
 
     
 }

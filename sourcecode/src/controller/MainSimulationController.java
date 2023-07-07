@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,15 +20,15 @@ public class MainSimulationController implements Initializable {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private Slider kineticSlider;
+    private Slider KSlider;
     @FXML
-    private Slider staticSlider;
+    private Slider SSlider;
 
-    // private Surface surface = new Surface();
-    // private AnimationController animation = new AnimationController();
-    // private SurfaceController surfaceController = new SurfaceController(kineticSlider,staticSlider,surface);
-    // private StatisticController statisticController = new StatisticController();
-    // private InputController inputController = new InputController();
+    private Surface surface = new Surface();
+    private AnimationController animation;
+    private SurfaceController surfaceController;
+    private StatisticController statisticController;
+    private InputController inputController;
     private DragDropController dragDropController = new DragDropController();
     // private ForceController forceController = new ForceController();
     private StackPane statisticPane;
@@ -37,16 +38,21 @@ public class MainSimulationController implements Initializable {
     private ImageView cube;
     @FXML
     private ImageView cylinder;
-
     @FXML
     private GridPane grid;
+
+    @FXML
+    private ImageView mainObject;
+
+    @FXML
+    private DialogPane dialog;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadStatistic();
-        loadForcePanel();
-        dragDropController.initializeCube(cube,grid);
-        dragDropController.initializeCylinder(cylinder,grid);
+        loadSurfacePanel();
+        dragDropController.initializeCube(cube,mainObject);
+        dragDropController.initializeCylinder(cylinder, mainObject);
 
 
 
@@ -70,8 +76,8 @@ public class MainSimulationController implements Initializable {
         }
     }
 
-    public void loadForcePanel() {
-        try{
+    public void loadSurfacePanel() {
+        try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/SurfacePanel.fxml"));
 
@@ -80,12 +86,21 @@ public class MainSimulationController implements Initializable {
             AnchorPane.setBottomAnchor(forcePane, 25.0);
             AnchorPane.setRightAnchor(forcePane, 100.0);
 
-
             mainPane.getChildren().add(forcePane);
+            this.surfaceController = loader.getController();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+    
+    public void reset() {
+        System.out.println("ok");
+        loadStatistic();
+        loadSurfacePanel();
+        dragDropController.initializeCube(cube,mainObject);
+        dragDropController.initializeCylinder(cylinder,mainObject);
     }
     
 }
