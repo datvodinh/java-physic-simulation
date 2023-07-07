@@ -33,10 +33,42 @@ public class DragDropController {
     double init_distance;
     double end_distance;
 
+    boolean is_cube = false;
+    boolean is_cylinder = false;
+
+    double mass;
+    double size;
+
+    private Cube MainCube;
+    private Cylinder MainCylinder;
+
+
+    @FXML
+    void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface) {
+        this.initializeCube(cube,myObj,surface);
+        this.initializeCylinder(cylinder, myObj, surface);
+
+        if (this.is_cube) {
+            try {
+                this.MainCube = new Cube(this.mass, this.size);
+                System.out.println("cube");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                this.MainCylinder = new Cylinder(this.mass, this.size);
+                System.out.println("cyn");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 
-    @FXML void initializeCube(ImageView cube, ImageView myObj) {
+    @FXML void initializeCube(ImageView cube, ImageView myObj, ImageView surface) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
@@ -57,15 +89,17 @@ public class DragDropController {
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
 
-            cubeInput(cube, myObj);
+            cubeInput(cube, myObj,surface);
             
             
             
         });
+
+        
     }
 
-    @FXML
-    void initializeCylinder(ImageView cylinder, ImageView myObj) {
+    
+    @FXML void initializeCylinder(ImageView cylinder, ImageView myObj, ImageView surface) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
@@ -83,50 +117,53 @@ public class DragDropController {
             cylinder.setScaleY(1);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
-            cylinderInput(cylinder, myObj);
+            cylinderInput(cylinder, myObj,surface);
 
         });
+
+        
     }
 
-    private void cubeInput(ImageView cube, ImageView myObj) {
+    private void cubeInput(ImageView cube, ImageView myObj, ImageView surface) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-    
+
         dialog.initStyle(StageStyle.DECORATED);
-    
+
         dialog.setTitle("Input Property for Cube");
         dialog.setHeaderText("Cube property");
-    
+
         ButtonType OKButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(OKButtonType);
-    
+
         GridPane dialogGrid = new GridPane();
         dialogGrid.setHgap(10);
         dialogGrid.setVgap(10);
         dialogGrid.setPadding(new Insets(20, 150, 10, 10));
-    
+
         TextField cubeMass = new TextField();
         cubeMass.setPromptText("Input mass for cube");
-    
+
         TextField cubeSide = new TextField();
         cubeSide.setPromptText("Input side-length for cube");
-    
+
         Button OKButton = (Button) dialog.getDialogPane().lookupButton(OKButtonType);
         OKButton.setDisable(true);
-    
+
         dialogGrid.add(new Label("Cube Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
         dialogGrid.add(cubeMass, 1, 0);
-        dialogGrid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default " + Cube.MAX_SIZE * 0.3 + ")"), 0, 1);
+        dialogGrid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default "
+                + Cube.MAX_SIZE * 0.5 + ")"), 0, 1);
         dialogGrid.add(cubeSide, 1, 1);
         dialogGrid.add(OKButton, 2, 2);
-    
+
         BooleanProperty condition1 = new SimpleBooleanProperty(false);
         BooleanProperty condition2 = new SimpleBooleanProperty(false);
-    
+
         cubeMass.textProperty().addListener((observable, oldValue, newValue) -> {
             condition1.set(!cubeMass.getText().isEmpty());
             OKButton.setDisable(!(condition1.get() && condition2.get()));
         });
-    
+
         cubeSide.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 double value = Double.parseDouble(cubeSide.getText());
@@ -137,25 +174,30 @@ public class DragDropController {
                 OKButton.setDisable(true);
             }
         });
-    
+
         OKButton.setOnAction(event -> {
             try {
                 myObj.setImage(new Image("img/cube.png"));
-                myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.3);
-                myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.3);
+                myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.5);
+                myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.5);
                 cube.setVisible(false);
+                mass = Double.parseDouble(cubeMass.getText());
+                size = Double.parseDouble(cubeSide.getText());
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
         });
-    
+
         dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
-    
+
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
     }
 
-    private void cylinderInput(ImageView cylinder, ImageView myObj) {
+    
+
+
+    private void cylinderInput(ImageView cylinder, ImageView myObj, ImageView surface) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -183,7 +225,7 @@ public class DragDropController {
         OKButton.setDisable(true);
         dialogGrid.add(new Label("Cylinder Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
         dialogGrid.add(cylinderMass, 1, 0);
-        dialogGrid.add(new Label("Cylinder Radius: (>= " + Cylinder.MIN_RADIUS + " and <=" + Cylinder.MAX_RADIUS + ", default " + Cylinder.MAX_RADIUS * 0.3 + ")"), 0, 1);
+        dialogGrid.add(new Label("Cylinder Radius: (>= " + Cylinder.MIN_RADIUS + " and <=" + Cylinder.MAX_RADIUS + ", default " + Cylinder.MAX_RADIUS * 0.5 + ")"), 0, 1);
         dialogGrid.add(cylinderRadius, 1, 1);
         dialogGrid.add(OKButton, 2, 2);
     
@@ -209,9 +251,11 @@ public class DragDropController {
         OKButton.setOnAction(event -> {
             try {
                 myObj.setImage(new Image("img/cylinder.png"));
-                myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.3);
-                myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.3);
+                myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.5);
+                myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.5);
                 cylinder.setVisible(false);
+                mass = Double.parseDouble(cylinderMass.getText());
+                size = Double.parseDouble(cylinderRadius.getText());
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
