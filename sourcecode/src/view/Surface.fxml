@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurfaceController">
+   <children>
+      <Slider fx:id="KSlider" blockIncrement="0.2" layoutX="64.0" layoutY="53.0" majorTickUnit="0.2" max="1.0" minorTickCount="2" prefHeight="61.0" prefWidth="213.0" showTickLabels="true" showTickMarks="true" />
+      <Text layoutX="113.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kinetic Coefficient" wrappingWidth="114.21630859375" />
+      <TextField fx:id="KCoeff" layoutX="307.0" layoutY="48.0" prefHeight="44.0" prefWidth="101.0" />
+      <Slider fx:id="SSlider" blockIncrement="0.2" layoutX="64.0" layoutY="200.0" majorTickUnit="0.2" max="1.0" minorTickCount="2" prefHeight="61.0" prefWidth="213.0" showTickLabels="true" showTickMarks="true" />
+      <Text layoutX="113.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stactic Coefficient" wrappingWidth="114.21630859375" />
+      <TextField fx:id="SCoeff" layoutX="307.0" layoutY="201.0" prefHeight="44.0" prefWidth="101.0" />
+   </children>
+</Pane>
