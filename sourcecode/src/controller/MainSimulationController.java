@@ -17,12 +17,11 @@ public class MainSimulationController implements Initializable {
     private Slider staticSlider;
     private Surface surface = new Surface();
     private AnimationController animation = new AnimationController();
-    private SurfaceController surfaceController = new SurfaceController(null, null, null);
+    private SurfaceController surfaceController = new SurfaceController(kineticSlider,staticSlider,surface);
     private StatisticController statisticController = new StatisticController();
     private InputController inputController = new InputController();
     private DragDropController dragDropController = new DragDropController();
     private ForceController forceController = new ForceController();
-    
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

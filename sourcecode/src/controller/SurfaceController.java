@@ -41,4 +41,29 @@ public class SurfaceController {
             }
         });
     }
+
+    public Slider getKineticSlider() {
+        return kineticSlider;
+    }
+
+    public void setKineticSlider(Slider kineticSlider) {
+        this.kineticSlider = kineticSlider;
+    }
+
+    public Slider getStaticSlider() {
+        return staticSlider;
+    }
+
+    public void setStaticSlider(Slider staticSlider) {
+        this.staticSlider = staticSlider;
+    }
+
+    public Surface getSurface() {
+        return surface;
+    }
+
+    public void setSurface(Surface surface) {
+        this.surface = surface;
+    }
+    
 }
