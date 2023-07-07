@@ -5,7 +5,10 @@ HUST
 
 ## Member
 
-| Vo Dinh Dat| @datvodinh10 |
-|Tran Quoc De |@tranquocde|
-|Nguyen Minh Cuong|@sohm2|
-|Hoang Thanh Dat|@datht4889|
+| Member            | Github        | 
+| :--               |    :---       |
+| Vo Dinh Dat       | @datvodinh10  |
+| Tran Quoc De      | @tranquocde   |
+| Nguyen Minh Cuong | @sohm2        |
+| Hoang Thanh Dat   | @datht4889    |       
+
