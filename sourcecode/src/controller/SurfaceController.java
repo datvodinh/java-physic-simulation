@@ -1,69 +1,82 @@
 package controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import model.Surface.Surface;
 
-public class SurfaceController {
-    private Slider kineticSlider;
-    private Slider staticSlider;
-    private Surface surface;
+public class SurfaceController implements Initializable {
+    @FXML
+    private Slider KSlider,SSlider;
+    @FXML
+    private TextField KCoeff,SCoeff;
+    Surface surface = new Surface();
+    
+    public Slider getKSlider() {
+        return KSlider;
+    }
 
-    public SurfaceController(Slider kineticSlider, Slider staticSlider, Surface surface) {
-        this.kineticSlider = kineticSlider;
-        this.staticSlider = staticSlider;
-        this.surface = surface;
-        kineticSlider.valueProperty().addListener(new ChangeListener<Number>() {
+    public Slider getSSlider() {
+        return SSlider;
+    }
+
+    public TextField getKCoeff() {
+        return KCoeff;
+    }
+
+    public TextField getSCoeff() {
+        return SCoeff;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0)
+            throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        KSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                double Kinetic = kineticSlider.getValue();
-                try{
+                double Kinetic = round(KSlider.getValue(),2);
+                try {
                     surface.setKineticCoef(Kinetic);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+                KCoeff.setText(Double.toString(surface.getKineticCoef()));
             }
+            
         });
-        staticSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        SSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                double Static = staticSlider.getValue();
-                try{
+                double Static = round(SSlider.getValue(),2);
+                try {
                     surface.setStaticCoef(Static);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+                SCoeff.setText(Double.toString(surface.getStaticCoef()));
             }
+            
         });
     }
 
-    public Slider getKineticSlider() {
-        return kineticSlider;
-    }
-
-    public void setKineticSlider(Slider kineticSlider) {
-        this.kineticSlider = kineticSlider;
-    }
-
-    public Slider getStaticSlider() {
-        return staticSlider;
-    }
-
-    public void setStaticSlider(Slider staticSlider) {
-        this.staticSlider = staticSlider;
-    }
-
-    public Surface getSurface() {
-        return surface;
-    }
-
-    public void setSurface(Surface surface) {
-        this.surface = surface;
-    }
     
 }
