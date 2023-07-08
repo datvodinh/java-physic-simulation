@@ -2,12 +2,14 @@ package controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -88,7 +90,7 @@ public class DragDropController {
             cube.setScaleY(1);
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
-
+            cube.setVisible(false);
             cubeInput(cube, myObj,surface);
             
             
@@ -115,6 +117,7 @@ public class DragDropController {
         cylinder.setOnMouseReleased(mouseEvent -> {
             cylinder.setScaleX(1);
             cylinder.setScaleY(1);
+            cylinder.setVisible(false);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
             cylinderInput(cylinder, myObj,surface);
@@ -183,12 +186,20 @@ public class DragDropController {
                 cube.setVisible(false);
                 mass = Double.parseDouble(cubeMass.getText());
                 size = Double.parseDouble(cubeSide.getText());
+                is_cube = true;
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
         });
 
         dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+
+        dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+                if (!is_cube){cube.setVisible(true);}
+            }
+        });
 
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
@@ -256,13 +267,24 @@ public class DragDropController {
                 cylinder.setVisible(false);
                 mass = Double.parseDouble(cylinderMass.getText());
                 size = Double.parseDouble(cylinderRadius.getText());
+                is_cylinder = true;
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
+            }
+        });
+
+        dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+        dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+                if (!is_cylinder){cylinder.setVisible(true);}
+                
             }
         });
     
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
+        
     }
     
 
