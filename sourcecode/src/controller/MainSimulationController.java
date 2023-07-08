@@ -106,29 +106,27 @@ public class MainSimulationController implements Initializable {
     public void onObjectInitialized() {
         if (dragDropController.is_cube) {
             mainCube = dragDropController.MainCube;
-            
+
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
-            animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
-            // animation.setMovement(backgroundTransition,background, mainCube.getVelocity() / 20, mainPane.getWidth());        
-            
-        });
-    
+                animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
+                animation.setMovement(backgroundTransition,background, mainCube.getVelocity() / 20, mainPane.getWidth());        
+
+            });
+            System.out.println(mainCube.getClass());
 
         } else {
             mainCylinder = dragDropController.MainCylinder;
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
-            animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
-            // animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20, mainPane.getWidth());        
-            animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
-        });
+                animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
+                animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20, mainPane.getWidth());        
+                animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
+            });
+            System.out.println(mainCylinder.getClass());
         }
-
-        
         timeline = new Timeline(frame);
-        forceSlider.setDisable(false);
+            forceSlider.setDisable(false);
+
     }
-
-
     
 
 

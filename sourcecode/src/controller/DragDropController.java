@@ -175,6 +175,7 @@ public class DragDropController {
                 cylinder.setVisible(true);
 
                 this.is_cube = true;
+                this.is_cylinder = false;
                 this.MainCube = new Cube(mass, size);
 
                 myObj.setLayoutY(250 - (scale - 1) * 75);
@@ -266,6 +267,7 @@ public class DragDropController {
                 cube.setVisible(true);
                 
                 this.is_cylinder = true;
+                this.is_cube = false;
                 this.MainCylinder = new Cylinder(mass, size);
 
                 myObj.setLayoutY(250 - (scale - 1) * 75);
