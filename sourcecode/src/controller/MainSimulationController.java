@@ -31,7 +31,7 @@ public class MainSimulationController implements Initializable {
     private InputController inputController;
     private DragDropController dragDropController = new DragDropController();
     // private ForceController forceController = new ForceController();
-    private StackPane statisticPane;
+    private Pane statisticPane;
     private Pane forcePane;
 
     @FXML
@@ -62,12 +62,12 @@ public class MainSimulationController implements Initializable {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/Statistic.fxml"));
+            loader.setLocation(getClass().getResource("/view/StatsPanel.fxml"));
 
-            statisticPane = (StackPane) loader.load();
+            statisticPane = (Pane) loader.load();
 
-            AnchorPane.setTopAnchor(statisticPane, 50.0);
-            AnchorPane.setRightAnchor(statisticPane, 50.0);
+            AnchorPane.setTopAnchor(statisticPane, 0.0);
+            AnchorPane.setRightAnchor(statisticPane, -10.0);
 
             mainPane.getChildren().add(statisticPane);
 
@@ -99,8 +99,8 @@ public class MainSimulationController implements Initializable {
         System.out.println("ok");
         loadStatistic();
         loadSurfacePanel();
-        dragDropController.initializeCube(cube,mainObject);
-        dragDropController.initializeCylinder(cylinder,mainObject);
+        // dragDropController.initializeCube(cube,mainObject);
+        // dragDropController.initializeCylinder(cylinder,mainObject);
     }
     
 }
