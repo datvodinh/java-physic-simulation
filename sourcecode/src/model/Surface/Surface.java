@@ -75,18 +75,14 @@ public class Surface {
 	public void setStaticCoef(double staticCoef) throws Exception {
 		if (staticCoef < 0) {
 			this.staticCoef = 0;
-			throw new Exception("Static friction coefficient must be >= 0 and <= " + MAX_STA_COEF);
 		} else if (staticCoef > MAX_STA_COEF) {
 			this.staticCoef = MAX_STA_COEF;
-			throw new Exception("Static friction coefficient must be >= 0 and <= " + MAX_STA_COEF);
 		} else if (staticCoef == 0) {
 			// Sets both staticCoef and kineticCoef to 0 if staticCoef = 0
 			kineticCoef = 0 ;
 			this.staticCoef = 0;
 		} else if (staticCoef <= getKineticCoef()) {
 			this.staticCoef = getKineticCoef() + STEP_COEF;
-			throw new Exception("Static friction coefficient must be > kinetic friction coefficient: "
-					+ String.format("%.3f", getKineticCoef()));
 		} else {
 			this.staticCoef = staticCoef;
 		}
@@ -100,15 +96,11 @@ public class Surface {
 	public void setKineticCoef(double kineticCoef) throws Exception {
 		if (kineticCoef < 0) {
 			this.kineticCoef = 0;
-			throw new Exception("Kinetic friction coefficient must be >= 0 and < " + MAX_STA_COEF);
 		} else if (kineticCoef >= MAX_STA_COEF) {
 			this.kineticCoef = Math.max(0, getStaticCoef() - STEP_COEF);
-			throw new Exception("Kinetic friction coefficient must be >= 0 and < " + MAX_STA_COEF);
 		} else if (getStaticCoef() <= kineticCoef) {
 			// Handles case when staticCoef has already = 0
 			this.kineticCoef = Math.max(0, getStaticCoef() - STEP_COEF);
-			throw new Exception("Kinetic friction coefficient must be < static friction coefficient: "
-					+ String.format("%.3f", getStaticCoef()));
 		} else {
 			this.kineticCoef = kineticCoef;
 		}
