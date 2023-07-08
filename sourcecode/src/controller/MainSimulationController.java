@@ -51,8 +51,8 @@ public class MainSimulationController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadStatistic();
         loadSurfacePanel();
-        dragDropController.initializeCube(cube,mainObject);
-        dragDropController.initializeCylinder(cylinder, mainObject);
+        // dragDropController.initializeCube(cube,mainObject);
+        // dragDropController.initializeCylinder(cylinder, mainObject);
 
 
 
