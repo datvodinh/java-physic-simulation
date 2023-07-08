@@ -47,13 +47,13 @@ public class DragDropController {
 
     @FXML
     void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
-        this.initializeCube(cube,myObj,surface,onObjectInitialized);
-        this.initializeCylinder(cylinder, myObj, surface,onObjectInitialized);
+        this.initializeCube(cube,cylinder,myObj,surface,onObjectInitialized);
+        this.initializeCylinder(cube, cylinder, myObj, surface,onObjectInitialized);
     }
 
 
 
-    @FXML void initializeCube(ImageView cube, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    @FXML void initializeCube(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
@@ -74,7 +74,7 @@ public class DragDropController {
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
             cube.setVisible(false);
-            cubeInput(cube, myObj,surface,onObjectInitialized);
+            cubeInput(cube,cylinder, myObj,surface,onObjectInitialized);
             
             
             
@@ -84,7 +84,7 @@ public class DragDropController {
     }
 
     
-    @FXML void initializeCylinder(ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    @FXML void initializeCylinder(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
@@ -103,14 +103,14 @@ public class DragDropController {
             cylinder.setVisible(false);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
-            cylinderInput(cylinder, myObj,surface, onObjectInitialized);
+            cylinderInput(cube, cylinder, myObj,surface, onObjectInitialized);
 
         });
 
         
     }
 
-    private void cubeInput(ImageView cube, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    private void cubeInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -167,6 +167,7 @@ public class DragDropController {
                 myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.5);
                 myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.5);
                 cube.setVisible(false);
+                cylinder.setVisible(true);
                 mass = Double.parseDouble(cubeMass.getText());
                 size = Double.parseDouble(cubeSide.getText());
                 this.is_cube = true;
@@ -193,7 +194,7 @@ public class DragDropController {
     
 
 
-    private void cylinderInput(ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    private void cylinderInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -250,6 +251,7 @@ public class DragDropController {
                 myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.5);
                 myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.5);
                 cylinder.setVisible(false);
+                cube.setVisible(true);
                 mass = Double.parseDouble(cylinderMass.getText());
                 size = Double.parseDouble(cylinderRadius.getText());
                 this.is_cylinder = true;
