@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 
 public abstract class MainObject {
     
-    public static final double MASS_DEFAULT = 100.0; // kg
+    public static final double MASS_DEFAULT = 50.0; // kg
     public static final double MAX_VEL = 50; // m/s
     public static final double MIN_VEL = -50; // m/s
 
