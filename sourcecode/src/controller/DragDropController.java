@@ -2,12 +2,14 @@ package controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -39,36 +41,19 @@ public class DragDropController {
     double mass;
     double size;
 
-    private Cube MainCube;
-    private Cylinder MainCylinder;
+    Cube MainCube;
+    Cylinder MainCylinder;
 
 
     @FXML
-    void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface) {
-        this.initializeCube(cube,myObj,surface);
-        this.initializeCylinder(cylinder, myObj, surface);
-
-        if (this.is_cube) {
-            try {
-                this.MainCube = new Cube(this.mass, this.size);
-                System.out.println("cube");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            try {
-                this.MainCylinder = new Cylinder(this.mass, this.size);
-                System.out.println("cyn");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+        this.initializeCube(cube,cylinder,myObj,surface,onObjectInitialized);
+        this.initializeCylinder(cube, cylinder, myObj, surface,onObjectInitialized);
     }
 
 
 
-    @FXML void initializeCube(ImageView cube, ImageView myObj, ImageView surface) {
+    @FXML void initializeCube(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
@@ -88,8 +73,8 @@ public class DragDropController {
             cube.setScaleY(1);
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
-
-            cubeInput(cube, myObj,surface);
+            cube.setVisible(false);
+            cubeInput(cube,cylinder, myObj,surface,onObjectInitialized);
             
             
             
@@ -99,7 +84,7 @@ public class DragDropController {
     }
 
     
-    @FXML void initializeCylinder(ImageView cylinder, ImageView myObj, ImageView surface) {
+    @FXML void initializeCylinder(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
@@ -115,16 +100,17 @@ public class DragDropController {
         cylinder.setOnMouseReleased(mouseEvent -> {
             cylinder.setScaleX(1);
             cylinder.setScaleY(1);
+            cylinder.setVisible(false);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
-            cylinderInput(cylinder, myObj,surface);
+            cylinderInput(cube, cylinder, myObj,surface, onObjectInitialized);
 
         });
 
         
     }
 
-    private void cubeInput(ImageView cube, ImageView myObj, ImageView surface) {
+    private void cubeInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -181,14 +167,25 @@ public class DragDropController {
                 myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.5);
                 myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.5);
                 cube.setVisible(false);
+                cylinder.setVisible(true);
                 mass = Double.parseDouble(cubeMass.getText());
                 size = Double.parseDouble(cubeSide.getText());
+                this.is_cube = true;
+                this.MainCube = new Cube(mass, size);
+                onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
         });
 
         dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+
+        dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+                if (!is_cube){cube.setVisible(true);}
+            }
+        });
 
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
@@ -197,7 +194,7 @@ public class DragDropController {
     
 
 
-    private void cylinderInput(ImageView cylinder, ImageView myObj, ImageView surface) {
+    private void cylinderInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -254,15 +251,29 @@ public class DragDropController {
                 myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.5);
                 myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.5);
                 cylinder.setVisible(false);
+                cube.setVisible(true);
                 mass = Double.parseDouble(cylinderMass.getText());
                 size = Double.parseDouble(cylinderRadius.getText());
+                this.is_cylinder = true;
+                this.MainCylinder = new Cylinder(mass, size);
+                onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
+            }
+        });
+
+        dialogGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+        dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+                if (!is_cylinder){cylinder.setVisible(true);}
+                
             }
         });
     
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
+        
     }
     
 
