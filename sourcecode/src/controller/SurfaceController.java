@@ -1,5 +1,7 @@
 package controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,8 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import model.Surface.Surface;
+import model.surface.Surface;
 
 public class SurfaceController implements Initializable {
     @FXML
@@ -30,9 +31,9 @@ public class SurfaceController implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                KCoeff.setText(Double.toString(surface.getKineticCoef()));
+                KCoeff.setText((Double.toString(round(surface.getKineticCoef(),4))));
             }
-            
+
         });
         SSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
@@ -44,10 +45,20 @@ public class SurfaceController implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                SCoeff.setText(Double.toString(surface.getStaticCoef()));
+                SCoeff.setText(Double.toString(round(surface.getStaticCoef(),4)));
             }
-            
+
         });
+
+    }
+    
+    public static double round(double value, int places) {
+        if (places < 0)
+            throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     

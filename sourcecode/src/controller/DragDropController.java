@@ -163,15 +163,22 @@ public class DragDropController {
 
         OKButton.setOnAction(event -> {
             try {
-                myObj.setImage(new Image("img/cube.png"));
-                myObj.setScaleX(Double.parseDouble(cubeSide.getText()) / 0.5);
-                myObj.setScaleY(Double.parseDouble(cubeSide.getText()) / 0.5);
-                cube.setVisible(false);
-                cylinder.setVisible(true);
                 mass = Double.parseDouble(cubeMass.getText());
                 size = Double.parseDouble(cubeSide.getText());
+                Double scale = size / 0.5;
+
+                myObj.setImage(new Image("img/cube.png"));
+                myObj.setScaleX(scale);
+                myObj.setScaleY(scale);
+
+                cube.setVisible(false);
+                cylinder.setVisible(true);
+
                 this.is_cube = true;
                 this.MainCube = new Cube(mass, size);
+
+                myObj.setLayoutY(250 - (scale - 1) * 75);
+
                 onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
@@ -247,15 +254,22 @@ public class DragDropController {
     
         OKButton.setOnAction(event -> {
             try {
-                myObj.setImage(new Image("img/cylinder.png"));
-                myObj.setScaleX(Double.parseDouble(cylinderRadius.getText()) / 0.5);
-                myObj.setScaleY(Double.parseDouble(cylinderRadius.getText()) / 0.5);
-                cylinder.setVisible(false);
-                cube.setVisible(true);
                 mass = Double.parseDouble(cylinderMass.getText());
                 size = Double.parseDouble(cylinderRadius.getText());
+                Double scale = size / 0.5;
+
+                myObj.setImage(new Image("img/cylinder.png"));
+                myObj.setScaleX(scale);
+                myObj.setScaleY(scale);
+
+                cylinder.setVisible(false);
+                cube.setVisible(true);
+                
                 this.is_cylinder = true;
                 this.MainCylinder = new Cylinder(mass, size);
+
+                myObj.setLayoutY(250 - (scale - 1) * 75);
+
                 onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)

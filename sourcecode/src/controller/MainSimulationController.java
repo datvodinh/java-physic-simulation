@@ -51,13 +51,16 @@ public class MainSimulationController implements Initializable {
     private Slider forceSlider;
     @FXML
     private TextField forceLabel;
+    @FXML
+    private ImageView background;
 
     AnimationController animation = new AnimationController();
     SurfaceController surfaceController = new SurfaceController();
     StatisticController statisticController = new StatisticController();
     DragDropController dragDropController = new DragDropController();
     ForceController forceController = new ForceController();
-    StackPane statisticPane;
+
+    Pane statisticPane;
     Pane forcePane;
     Cube mainCube;
     Cylinder mainCylinder;
@@ -74,17 +77,22 @@ public class MainSimulationController implements Initializable {
         loadStatistic();
         loadSurfacePanel();
         forceSlider.setDisable(true);
+
         dragDropController.initializeObject(cube, cylinder, mainObject, surface, this::onObjectInitialized);
         forceLabel.setText("0 N");
         forceSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                forceLabel.setText(round(forceSlider.getValue(),2) + "N");
+                forceLabel.setText(round(forceSlider.getValue(), 2) + "N");
+                if (dragDropController.is_cube) {
+                    mainCube.setVelocity(forceSlider.getValue() / 10);
+                }
+                else {
+                    mainCylinder.setVelocity(forceSlider.getValue() / 10);
+                }
                 timeline.play();
 
-                
-                
             }
                         
         });
@@ -98,10 +106,10 @@ public class MainSimulationController implements Initializable {
     public void onObjectInitialized() {
         if (dragDropController.is_cube) {
             mainCube = dragDropController.MainCube;
-            mainCube.setVelocity(5);
+            
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
             animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
-            animation.setMovement(backgroundTransition, surface, mainCube.getVelocity() / 20, mainPane.getWidth());        
+            // animation.setMovement(backgroundTransition,background, mainCube.getVelocity() / 20, mainPane.getWidth());        
             
         });
     
@@ -110,8 +118,8 @@ public class MainSimulationController implements Initializable {
             mainCylinder = dragDropController.MainCylinder;
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
             animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
-            animation.setMovement(backgroundTransition, surface, mainCylinder.getVelocity() / 20, mainPane.getWidth());        
-            animation.setRotate(rotate, cylinder, mainCylinder.getVelocity());
+            // animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20, mainPane.getWidth());        
+            animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
         });
         }
 
@@ -128,12 +136,14 @@ public class MainSimulationController implements Initializable {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/Statistic.fxml"));
+            loader.setLocation(getClass().getResource("/view/StatsPanel.fxml"));
 
-            statisticPane = (StackPane) loader.load();
+            statisticPane = (Pane) loader.load();
+            statisticPane.setScaleX(0.9);
+            statisticPane.setScaleY(0.9);
 
-            AnchorPane.setTopAnchor(statisticPane, 50.0);
-            AnchorPane.setRightAnchor(statisticPane, 50.0);
+            AnchorPane.setTopAnchor(statisticPane, 25.0);
+            AnchorPane.setRightAnchor(statisticPane, 35.0);
 
             mainPane.getChildren().add(statisticPane);
             this.statisticController = loader.getController();
