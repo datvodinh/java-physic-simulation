@@ -55,10 +55,11 @@ public class MainSimulationController implements Initializable {
     private ImageView background;
 
     AnimationController animation = new AnimationController();
-    SurfaceController surfaceController = new SurfaceController();
-    StatisticController statisticController = new StatisticController();
     DragDropController dragDropController = new DragDropController();
-    ForceController forceController = new ForceController();
+    @FXML
+    private SurfaceController surfaceController;
+    @FXML
+    private StatisticController statisticController;
 
     Pane statisticPane;
     Pane forcePane;
@@ -100,6 +101,8 @@ public class MainSimulationController implements Initializable {
         forceSlider.setOnMouseReleased(event -> {
             forceSlider.setValue(0);
         });
+        
+
 
     }
     
@@ -109,7 +112,8 @@ public class MainSimulationController implements Initializable {
 
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
                 animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
-                animation.setMovement(backgroundTransition,background, mainCube.getVelocity() / 20, mainPane.getWidth());        
+                animation.setMovement(backgroundTransition, background, mainCube.getVelocity() / 20,
+                        mainPane.getWidth());      
 
             });
             System.out.println(mainCube.getClass());
@@ -177,6 +181,14 @@ public class MainSimulationController implements Initializable {
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    public void increaseForce() {
+        forceSlider.setValue(forceSlider.getValue() + 50);
+    }
+    
+    public void decreaseForce(){
+        forceSlider.setValue(forceSlider.getValue() - 50);
     }
 
     

@@ -52,9 +52,11 @@ public class StatisticController implements Initializable {
     public TextField getAccelerationText() {
         return AccelerationText;
     }
+
     public TextField getPositionText() {
         return PositionText;
     }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         

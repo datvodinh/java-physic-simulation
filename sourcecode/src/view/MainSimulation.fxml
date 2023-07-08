@@ -76,6 +76,16 @@
       </Label>
       <ImageView fx:id="mainObject" fitHeight="150.0" fitWidth="150.0" layoutX="565.0" layoutY="250.0" pickOnBounds="true" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="LAVENDER" height="260.0" layoutX="974.0" layoutY="25.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="275.0" />
+      <Button fx:id="decreaseForce" layoutX="465.0" layoutY="545.0" mnemonicParsing="false" onAction="#decreaseForce" prefHeight="50.0" prefWidth="50.0" text="◀◀">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="increaseForce" layoutX="765.0" layoutY="545.0" mnemonicParsing="false" onAction="#increaseForce" prefHeight="50.0" prefWidth="50.0" text="▶▶">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
 
    </children>
 </AnchorPane>
