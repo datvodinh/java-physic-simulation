@@ -13,9 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import model.Surface.Surface;
 import model.object.Cube;
 import model.object.Cylinder;
+import model.object.MainObject;
+import model.surface.Surface;
 
 
 public class MainSimulationController implements Initializable {
@@ -48,19 +49,28 @@ public class MainSimulationController implements Initializable {
     @FXML
     private ImageView surface;
 
-    private Cube MainCube;
-    private Cylinder MainCylinder;
+    MainObject mainObj;
     
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadStatistic();
         loadSurfacePanel();
-        
-        
-
+        dragDropController.initializeObject(cube, cylinder, mainObject, surface, this::onObjectInitialized);
 
     }
+    
+    public void onObjectInitialized() {
+        if (dragDropController.is_cube) {
+            mainObj = (Cube) dragDropController.MainCube;
+
+        } else {
+            mainObj = (Cylinder) dragDropController.MainCylinder;
+        }
+        System.out.println(mainObj.getClass());
+    }
+    
+
 
     public void loadStatistic() {
         try {

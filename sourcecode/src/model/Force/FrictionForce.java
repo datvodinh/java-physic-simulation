@@ -8,7 +8,7 @@ public class FrictionForce extends Force{
 		super(magnitude);
 	}
 
-	private Surface surface;
+	private model.surface.Surface surface;
 	private MainObject mainObject;
 	private AppliedForce appliedForce;
 	public static final double GRAVITATIONAL_ACCELERATION = 10;

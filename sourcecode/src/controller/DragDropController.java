@@ -41,36 +41,19 @@ public class DragDropController {
     double mass;
     double size;
 
-    private Cube MainCube;
-    private Cylinder MainCylinder;
+    Cube MainCube;
+    Cylinder MainCylinder;
 
 
     @FXML
-    void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface) {
-        this.initializeCube(cube,myObj,surface);
-        this.initializeCylinder(cylinder, myObj, surface);
-
-        if (this.is_cube) {
-            try {
-                this.MainCube = new Cube(this.mass, this.size);
-                System.out.println("cube");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            try {
-                this.MainCylinder = new Cylinder(this.mass, this.size);
-                System.out.println("cyn");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+        this.initializeCube(cube,myObj,surface,onObjectInitialized);
+        this.initializeCylinder(cylinder, myObj, surface,onObjectInitialized);
     }
 
 
 
-    @FXML void initializeCube(ImageView cube, ImageView myObj, ImageView surface) {
+    @FXML void initializeCube(ImageView cube, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
@@ -91,7 +74,7 @@ public class DragDropController {
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
             cube.setVisible(false);
-            cubeInput(cube, myObj,surface);
+            cubeInput(cube, myObj,surface,onObjectInitialized);
             
             
             
@@ -101,7 +84,7 @@ public class DragDropController {
     }
 
     
-    @FXML void initializeCylinder(ImageView cylinder, ImageView myObj, ImageView surface) {
+    @FXML void initializeCylinder(ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
@@ -120,14 +103,14 @@ public class DragDropController {
             cylinder.setVisible(false);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
-            cylinderInput(cylinder, myObj,surface);
+            cylinderInput(cylinder, myObj,surface, onObjectInitialized);
 
         });
 
         
     }
 
-    private void cubeInput(ImageView cube, ImageView myObj, ImageView surface) {
+    private void cubeInput(ImageView cube, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -186,7 +169,9 @@ public class DragDropController {
                 cube.setVisible(false);
                 mass = Double.parseDouble(cubeMass.getText());
                 size = Double.parseDouble(cubeSide.getText());
-                is_cube = true;
+                this.is_cube = true;
+                this.MainCube = new Cube(mass, size);
+                onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
@@ -208,7 +193,7 @@ public class DragDropController {
     
 
 
-    private void cylinderInput(ImageView cylinder, ImageView myObj, ImageView surface) {
+    private void cylinderInput(ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
@@ -267,7 +252,9 @@ public class DragDropController {
                 cylinder.setVisible(false);
                 mass = Double.parseDouble(cylinderMass.getText());
                 size = Double.parseDouble(cylinderRadius.getText());
-                is_cylinder = true;
+                this.is_cylinder = true;
+                this.MainCylinder = new Cylinder(mass, size);
+                onObjectInitialized.run();
             } catch (Exception e) {
                 // Handle the exception accordingly (e.g., log or display an error message)
             }
