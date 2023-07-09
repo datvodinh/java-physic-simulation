@@ -1,6 +1,10 @@
-package model.Force;
-import model.Object.MainObject;
-import model.Surface.Surface;
+package model.simulation;
+import model.surface.Surface;
+import model.force.AppliedForce;
+import model.force.Force;
+import model.force.FrictionForce;
+import model.force.Vector;
+import model.object.MainObject;
 public class ForceSimulation {
 	private MainObject mainObject;
 	private Surface surface;
@@ -73,6 +77,7 @@ public class ForceSimulation {
 	}
 	public void setAppliedForce(double appliedForce) {
 		this.appliedForce.setMagnitude(appliedForce);
+		setNetForce();
 	}
 	public Force getFrictionForce() {
 		return frictionForce;
@@ -84,7 +89,7 @@ public class ForceSimulation {
 		return netForce;
 	}
 	public void updateObjAcc() {
-		getMainObject().updateAcceleration(getNetForce().getMagnitude());
+		getMainObject().updateAcc(getNetForce());
 	}
 	public void applyForceInTime(double t) {
 		getMainObject().applyForceInTime(getNetForce(), getFrictionForce(), t);
