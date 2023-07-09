@@ -3,6 +3,8 @@ package model.object;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import model.force.Force;
+
 public abstract class MainObject {
     
     public static final double MASS_DEFAULT = 50.0; // kg
@@ -38,6 +40,10 @@ public abstract class MainObject {
         this.accel = accel;
     }
 
+    public double updateAcceleration(double netForce) {
+        return netForce / getMass();
+    }
+
     public double getVelocity() {
         return vel;
     }
@@ -46,8 +52,23 @@ public abstract class MainObject {
         this.vel = vel;
     }
 
-    public void updateVelocity(double a, double delta_t) {
-        setVelocity(getVelocity() + a * delta_t);
+    public void updateVelocity(double delta_t) {
+        double oldVel = getVelocity();
+        double newVel = oldVel + getAcceleration() * delta_t;
+
+        if (oldVel * newVel < 0) {
+            setVelocity(0);
+        }
+        else {
+            setVelocity(newVel);
+        }
+
+        if (newVel > MAX_VEL) {
+            setVelocity(MAX_VEL);
+        }
+        else if (newVel < MIN_VEL) {
+            setVelocity(MIN_VEL);
+        }
     }
     public double getPosition() {
         return pos;
@@ -57,13 +78,18 @@ public abstract class MainObject {
         this.pos = pos;
     }
 
-    public void updatePosition(double delta_t) {
+    public void updatePosition( double delta_t) {
         setPosition(getPosition() + getVelocity() * delta_t);
     }
 
-    public double calAcceleration(double force, double friction) {
-        return (force - friction) / mass;
-    }
+    public void applyForceInTime(Force netforce, Force fForce, double t) {
+        updateAcceleration(netforce.getMagnitude());
+        updatePosition(t);
+		updateVelocity(t);
+		
+	}
+
+    
 
     public static double round(double value, int places) {
         if (places < 0)

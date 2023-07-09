@@ -84,7 +84,7 @@ public class ForceSimulation {
 		return netForce;
 	}
 	public void updateObjAcc() {
-		getMainObject().updateAcc(getNetForce());
+		getMainObject().updateAcceleration(getNetForce().getMagnitude());
 	}
 	public void applyForceInTime(double t) {
 		getMainObject().applyForceInTime(getNetForce(), getFrictionForce(), t);
