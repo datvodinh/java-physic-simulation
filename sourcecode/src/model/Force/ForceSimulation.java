@@ -82,15 +82,14 @@ public class ForceSimulation {
 	public Force getFrictionForce() {
 		return frictionForce;
 	}
-	public void setFrictionForce(double frictionForce) {
-		this.appliedForce.setMagnitude(frictionForce);
+	public void setFrictionForce() {
+		this.frictionForce.setFrictionForce();
 	}
+
 	public Force getNetForce() {
 		return netForce;
 	}
-	public void updateObjAcc() {
-		getMainObject().updateAcc(getNetForce());
-	}
+
 	public void applyForceInTime(double t) {
 		getMainObject().applyForceInTime(getNetForce(), getFrictionForce(), t);
 	}

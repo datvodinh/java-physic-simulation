@@ -35,15 +35,4 @@ public class AnimationController {
         rotate.play();
     }
 
-    public void pause(TranslateTransition transition) {
-        transition.pause();
-    }
-
-    public void play(TranslateTransition transition) {
-        transition.play();
-    }
-
-    public void close() {
-        System.exit(0);
-    }
 }

@@ -16,17 +16,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import model.Force.AppliedForce;
+import model.Force.ForceSimulation;
+import model.Force.FrictionForce;
 import model.Object.Cube;
 import model.Object.Cylinder;
+import model.Surface.Surface;
 
 
 public class MainSimulationController implements Initializable {
@@ -34,35 +37,32 @@ public class MainSimulationController implements Initializable {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private Slider KSlider;
-    @FXML
-    private Slider SSlider;
-    @FXML
-    private ImageView cube;
-    @FXML
-    private ImageView cylinder;
+    private ImageView cube, cylinder, mainObject, surface, background;
     @FXML
     private GridPane grid;
-    @FXML
-    private ImageView mainObject;
-    @FXML
-    private ImageView surface;
     @FXML
     private Slider forceSlider;
     @FXML
     private TextField forceLabel;
     @FXML
-    private ImageView background;
+    private Button increaseForce, decreaseForce;
 
+    @FXML
+    private SurfaceController surfaceController;
+    @FXML
+    private StatisticController statisticController;
     AnimationController animation = new AnimationController();
     DragDropController dragDropController = new DragDropController();
-    private SurfaceController surfaceController;
-    private StatisticController statisticController;
 
     Pane statisticPane;
     Pane forcePane;
+
     Cube mainCube;
     Cylinder mainCylinder;
+    ForceSimulation forceSimulation;
+    Surface mainSurface = new Surface();
+    AppliedForce appliedForce = new AppliedForce(0);
+    FrictionForce frictionForce;
 
     KeyFrame frame;
     Timeline timeline;
@@ -75,23 +75,23 @@ public class MainSimulationController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadStatistic();
         loadSurfacePanel();
-        forceSlider.setDisable(true);
+        disableForceController(true);
 
-        dragDropController.initializeObject(cube, cylinder, mainObject, surface, this::onObjectInitialized);
+
+        dragDropController.initializeObject(cube, cylinder, mainObject, surface, () -> {
+            try {
+                onObjectInitialized();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         forceLabel.setText("0 N");
         forceSlider.valueProperty().addListener(new ChangeListener<Number>() {
-
+        
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
                 forceLabel.setText(round(forceSlider.getValue(), 2) + "N");
-                if (dragDropController.is_cube) {
-                    mainCube.setVelocity(forceSlider.getValue() / 10);
-                }
-                else {
-                    mainCylinder.setVelocity(forceSlider.getValue() / 10);
-                }
-                timeline.play();
-
+                
             }
                         
         });
@@ -99,37 +99,74 @@ public class MainSimulationController implements Initializable {
         forceSlider.setOnMouseReleased(event -> {
             forceSlider.setValue(0);
         });
-        
+
+
+
 
 
     }
     
-    public void onObjectInitialized() {
+    public void onObjectInitialized() throws Exception {
         if (dragDropController.is_cube) {
             mainCube = dragDropController.MainCube;
-
+            forceSimulation = new ForceSimulation(mainCube, mainSurface, appliedForce);
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
                 animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
                 animation.setMovement(backgroundTransition, background, mainCube.getVelocity() / 20,
-                        mainPane.getWidth());      
+                        mainPane.getWidth());
+                try {
+                    mainSurface.setStaticCoef(surfaceController.getSSlider().getValue());
+                    mainSurface.setKineticCoef(surfaceController.getKSlider().getValue());
+                    forceSimulation.setAppliedForce(forceSlider.getValue());
+                    forceSimulation.setFrictionForce();
+                    forceSimulation.setNetForce();
+                    forceSimulation.applyForceInTime(0.2);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
 
             });
-            System.out.println(mainCube.getClass());
+            
 
         } else {
             mainCylinder = dragDropController.MainCylinder;
+
+            forceSimulation = new ForceSimulation(mainCylinder, mainSurface, appliedForce);
+
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
                 animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
-                animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20, mainPane.getWidth());        
+                animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20,mainPane.getWidth());
                 animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
+                try {
+                    mainSurface.setKineticCoef(surfaceController.getKSlider().getValue());
+                    mainSurface.setStaticCoef(surfaceController.getSSlider().getValue());
+                    forceSimulation.setAppliedForce(forceSlider.getValue());
+                    forceSimulation.setFrictionForce();
+                    forceSimulation.setNetForce();
+                    forceSimulation.applyForceInTime(0.2);
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
-            System.out.println(mainCylinder.getClass());
         }
-        timeline = new Timeline(frame);
-            forceSlider.setDisable(false);
+        
 
+
+        timeline = new Timeline(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        disableForceController(false);
     }
     
+    public void disableForceController(boolean b) {
+        forceSlider.setDisable(b);
+        increaseForce.setDisable(b);
+        decreaseForce.setDisable(b);
+        surfaceController.disableFrictionSlider(b);
+    }
 
 
     public void loadStatistic() {
@@ -185,8 +222,42 @@ public class MainSimulationController implements Initializable {
         forceSlider.setValue(forceSlider.getValue() + 50);
     }
     
-    public void decreaseForce(){
+    public void decreaseForce() {
         forceSlider.setValue(forceSlider.getValue() - 50);
+    }
+
+    public void reset() {
+        mainObject.setImage(null);
+        forceSlider.setValue(0);
+        surfaceController.reset();
+        cube.setVisible(true);
+        cylinder.setVisible(true);
+        if (timeline!=null) {timeline.pause();}
+        surfaceTransition.pause();
+        backgroundTransition.pause();
+        if (dragDropController.is_cylinder) {
+            rotate.pause();
+        }
+    }
+    
+    public void play() {
+        surfaceTransition.play();
+        backgroundTransition.play();
+        if (dragDropController.is_cylinder) {
+            rotate.play();
+        }
+        if (timeline!=null)
+        {timeline.play();}
+    }
+
+    public void pause() {
+        surfaceTransition.pause();
+        backgroundTransition.pause();
+        if (dragDropController.is_cylinder) {
+            rotate.pause();
+        }
+        if (timeline!=null)
+        {timeline.pause();}
     }
 
     
