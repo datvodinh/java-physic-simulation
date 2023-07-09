@@ -1,4 +1,7 @@
 package model.object;
+
+import model.force.Force;
+
 public class Cylinder extends MainObject {
     public static final double MAX_RADIUS = 1.0;
     public static final double MIN_RADIUS = 0.2;
@@ -71,20 +74,15 @@ public class Cylinder extends MainObject {
         setAngularPos(getAngularPos()+ getAngularVel() * delta_t);
     }
     
-    public void update(double a, double delta_t) {
-        updateVelocity(a, delta_t);
-        updatePosition(delta_t);
-        updateAngularVel(a, delta_t);
-        updateAngularPos(delta_t);
-
-        if (round(getVelocity(),0) > MAX_VEL) {
-            setVelocity(MAX_VEL);
-        } else if (round(getVelocity(),0) < MIN_VEL) {
-            setVelocity(MIN_VEL);
+    public void applyForceInTime(Force netforce, Force fForce, double t) {
+            updateAcceleration(netforce.getMagnitude());
+            updatePosition(t);
+            updateVelocity(t);
+            updateAngularPos(t);
+            updateAngularVel(fForce.getAbsoluteMagnitude(), t);
+            
         }
-
-    }
-    
+        
 
 
 }
