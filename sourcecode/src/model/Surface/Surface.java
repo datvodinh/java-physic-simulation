@@ -1,5 +1,5 @@
 
-package model.surface;
+package model.Surface;
 /**
  * This class is used to represent surface which contains attributes and methods
  * for adjusting static friction coefficient and kinetic friction coefficient

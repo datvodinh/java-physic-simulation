@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import model.surface.Surface;
+import model.Surface.Surface;
 
 public class SurfaceController implements Initializable {
     @FXML

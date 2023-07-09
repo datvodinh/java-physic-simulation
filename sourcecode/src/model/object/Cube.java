@@ -1,4 +1,4 @@
-package model.object;
+package model.Object;
 public class Cube extends MainObject {
     public static final double MAX_SIZE = 1.0;
     public static final double MIN_SIZE = 0.2;

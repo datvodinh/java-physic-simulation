@@ -25,8 +25,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import model.object.Cube;
-import model.object.Cylinder;
+import model.Object.Cube;
+import model.Object.Cylinder;
 
 
 public class MainSimulationController implements Initializable {
@@ -56,9 +56,7 @@ public class MainSimulationController implements Initializable {
 
     AnimationController animation = new AnimationController();
     DragDropController dragDropController = new DragDropController();
-    @FXML
     private SurfaceController surfaceController;
-    @FXML
     private StatisticController statisticController;
 
     Pane statisticPane;
