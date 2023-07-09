@@ -28,7 +28,8 @@ public class FrictionForce extends Force{
 				}
 			}
 
-            if (mainObject instanceof Cube) {
+            if (appliedForceValue != 0){
+				if (mainObject instanceof Cube) {
                 if (appliedForceValue <= surface.getStaticCoef() * normalForce) {
                     setMagnitude(direction*appliedForce.getMagnitude()); // Set the friction force magnitude as positive
                 } else {
@@ -40,7 +41,7 @@ public class FrictionForce extends Force{
                 } else {
                     setMagnitude(direction*surface.getKineticCoef() * normalForce); // Set the friction force magnitude as positive
                 }
-            }
+            }}
         }
 	}
 

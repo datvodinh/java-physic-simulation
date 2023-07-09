@@ -25,17 +25,17 @@
             <Image url="@../img/surface.png" />
          </image>
       </ImageView>
-      <Button layoutX="1195.0" layoutY="511.0" mnemonicParsing="false" prefWidth="70.0" text="Play">
+      <Button layoutX="1195.0" layoutY="511.0" mnemonicParsing="false" onAction="#play" prefWidth="70.0" text="Play">
          <font>
             <Font name="Consolas" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="1195.0" layoutY="616.0" mnemonicParsing="false" prefWidth="70.0" text="Reset">
+      <Button layoutX="1195.0" layoutY="616.0" mnemonicParsing="false" onAction="#reset" prefWidth="70.0" text="Reset">
          <font>
             <Font name="Consolas" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="1195.0" layoutY="561.0" mnemonicParsing="false" prefWidth="70.0" text="Pause">
+      <Button layoutX="1195.0" layoutY="561.0" mnemonicParsing="false" onAction="#pause" prefWidth="70.0" text="Pause">
          <font>
             <Font name="Consolas" size="15.0" />
          </font>
