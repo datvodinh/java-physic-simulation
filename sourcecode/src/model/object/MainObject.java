@@ -1,9 +1,9 @@
-package model.object;
+package model.Object;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import model.force.Force;
+import model.Force.Force;
 
 public abstract class MainObject {
     

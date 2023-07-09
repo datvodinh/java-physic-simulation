@@ -1,14 +1,14 @@
-package model.force;
-import model.surface.Surface;
-import model.object.Cylinder;
-import model.object.Cube;
-import model.object.MainObject;
+package model.Force;
+import model.Object.Cube;
+import model.Object.Cylinder;
+import model.Object.MainObject;
+import model.Surface.Surface;
 public class FrictionForce extends Force{
 	public FrictionForce(double magnitude) {
 		super(magnitude);
 	}
 
-	private model.surface.Surface surface;
+	private Surface surface;
 	private MainObject mainObject;
 	private AppliedForce appliedForce;
 	public static final double GRAVITATIONAL_ACCELERATION = 10;

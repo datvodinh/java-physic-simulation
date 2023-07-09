@@ -1,6 +1,6 @@
-package model.object;
+package model.Object;
 
-import model.force.Force;
+import model.Force.Force;
 
 public class Cylinder extends MainObject {
     public static final double MAX_RADIUS = 1.0;

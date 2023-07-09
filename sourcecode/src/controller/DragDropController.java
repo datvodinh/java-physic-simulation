@@ -20,9 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
-import model.object.Cube;
-import model.object.Cylinder;
-import model.object.MainObject;
+import model.Object.Cube;
+import model.Object.Cylinder;
+import model.Object.MainObject;
 
 public class DragDropController {
 

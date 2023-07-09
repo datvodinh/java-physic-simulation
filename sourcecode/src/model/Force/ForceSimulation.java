@@ -1,6 +1,6 @@
-package model.force;
-import model.surface.Surface;
-import model.object.MainObject;
+package model.Force;
+import model.Object.MainObject;
+import model.Surface.Surface;
 public class ForceSimulation {
 	private MainObject mainObject;
 	private Surface surface;
