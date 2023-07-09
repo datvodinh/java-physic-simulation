@@ -56,8 +56,8 @@ public class MainSimulationController implements Initializable {
 
     AnimationController animation = new AnimationController();
     DragDropController dragDropController = new DragDropController();
-    private SurfaceController surfaceController;
-    private StatisticController statisticController;
+    private SurfaceController surfaceController = new SurfaceController();
+    private StatisticController statisticController = new StatisticController();
 
     Pane statisticPane;
     Pane forcePane;
