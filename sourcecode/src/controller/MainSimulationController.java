@@ -24,12 +24,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import model.Force.AppliedForce;
-import model.Force.ForceSimulation;
-import model.Force.FrictionForce;
-import model.Object.Cube;
-import model.Object.Cylinder;
-import model.Surface.Surface;
+import model.force.AppliedForce;
+import model.force.ForceSimulation;
+import model.force.FrictionForce;
+import model.object.Cube;
+import model.object.Cylinder;
+import model.surface.Surface;
 
 
 public class MainSimulationController implements Initializable {
