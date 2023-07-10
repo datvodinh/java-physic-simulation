@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -65,7 +66,7 @@ public class MainSimulationController implements Initializable {
     FrictionForce frictionForce;
 
     KeyFrame frame;
-    Timeline timeline;
+    Timeline timeline = new Timeline();
     TranslateTransition surfaceTransition = new TranslateTransition();
     TranslateTransition backgroundTransition = new TranslateTransition();
     RotateTransition rotate = new RotateTransition();
@@ -121,6 +122,30 @@ public class MainSimulationController implements Initializable {
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
                     forceSimulation.applyForceInTime(0.2);
+                    if (statisticController.getMassBox().isSelected()){
+                        statisticController.getMassText().setText(Double.toString(mainCube.getMass()));
+                    }
+                    else{
+                        statisticController.getMassText().setText(null);
+                    }
+                    if (statisticController.getVelocityBox().isSelected()){
+                        statisticController.getVelocityText().setText(Double.toString(mainCube.getVelocity()));
+                    }
+                    else{
+                        statisticController.getVelocityText().setText(null);
+                    }
+                    if (statisticController.getAccelerationBox().isSelected()){
+                        statisticController.getAccelerationText().setText(Double.toString(mainCube.getAcceleration()));
+                    }
+                    else{
+                        statisticController.getAccelerationText().setText(null);
+                    }
+                    if (statisticController.getPositionBox().isSelected()){
+                        statisticController.getPositionText().setText((Double.toString(mainCube.getPosition())));
+                    }
+                    else{
+                        statisticController.getPositionText().setText(null);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -146,7 +171,30 @@ public class MainSimulationController implements Initializable {
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
                     forceSimulation.applyForceInTime(0.2);
-                    
+                    if (statisticController.getMassBox().isSelected()){
+                        statisticController.getMassText().setText(Double.toString(mainCylinder.getMass()));
+                    }
+                    else{
+                        statisticController.getMassText().setText(null);
+                    }
+                    if (statisticController.getVelocityBox().isSelected()){
+                        statisticController.getVelocityText().setText(Double.toString(mainCylinder.getVelocity()));
+                    }
+                    else{
+                        statisticController.getVelocityText().setText(null);
+                    }
+                    if (statisticController.getAccelerationBox().isSelected()){
+                        statisticController.getAccelerationText().setText(Double.toString(mainCylinder.getAcceleration()));
+                    }
+                    else{
+                        statisticController.getAccelerationText().setText(null);
+                    }
+                    if (statisticController.getPositionBox().isSelected()){
+                        statisticController.getPositionText().setText(Double.toString(mainCylinder.getPosition()));
+                    }
+                    else{
+                        statisticController.getPositionText().setText(null);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -155,10 +203,13 @@ public class MainSimulationController implements Initializable {
         
 
 
-        timeline = new Timeline(frame);
+        // timeline = new Timeline(frame);
+        timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        // timeline.getKeyFrames().clear();
         disableForceController(false);
+        System.out.println(timeline.getKeyFrames().size());
     }
     
     public void disableForceController(boolean b) {
@@ -184,6 +235,7 @@ public class MainSimulationController implements Initializable {
 
             mainPane.getChildren().add(statisticPane);
             this.statisticController = loader.getController();
+            
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -202,6 +254,7 @@ public class MainSimulationController implements Initializable {
 
             mainPane.getChildren().add(forcePane);
             this.surfaceController = loader.getController();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -230,6 +283,7 @@ public class MainSimulationController implements Initializable {
         mainObject.setImage(null);
         forceSlider.setValue(0);
         surfaceController.reset();
+        statisticController.reset();
         cube.setVisible(true);
         cylinder.setVisible(true);
         if (timeline!=null) {timeline.pause();}
@@ -238,6 +292,7 @@ public class MainSimulationController implements Initializable {
         if (dragDropController.is_cylinder) {
             rotate.pause();
         }
+
     }
     
     public void play() {
