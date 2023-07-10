@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -56,7 +58,16 @@ public class StatisticController implements Initializable {
     public TextField getPositionText() {
         return PositionText;
     }
-    
+    public void reset(){
+        ForceText.setText(null);
+        SumForceText.setText(null);
+        ValueText.setText(null);
+        MassText.setText(null);
+        VelocityText.setText(null);
+        AccelerationText.setText(null);
+        PositionText.setText(null);
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
