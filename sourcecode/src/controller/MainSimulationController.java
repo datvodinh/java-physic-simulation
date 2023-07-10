@@ -124,8 +124,8 @@ public class MainSimulationController implements Initializable {
                 animation.setMovement(backgroundTransition, background, mainCube.getVelocity() / 20,
                         mainPane.getWidth());
                 try {
-                    mainSurface.setStaticCoef(surfaceController.getSSlider().getValue());
-                    mainSurface.setKineticCoef(surfaceController.getKSlider().getValue());
+                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
+                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
                     forceSimulation.setAppliedForce(forceSlider.getValue());
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
@@ -173,8 +173,8 @@ public class MainSimulationController implements Initializable {
                 animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20,mainPane.getWidth());
                 animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
                 try {
-                    mainSurface.setKineticCoef(surfaceController.getKSlider().getValue());
-                    mainSurface.setStaticCoef(surfaceController.getSSlider().getValue());
+                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
+                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
                     forceSimulation.setAppliedForce(forceSlider.getValue());
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
