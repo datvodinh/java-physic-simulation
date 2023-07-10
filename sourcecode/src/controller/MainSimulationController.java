@@ -66,7 +66,7 @@ public class MainSimulationController implements Initializable {
     FrictionForce frictionForce;
 
     KeyFrame frame;
-    Timeline timeline;
+    Timeline timeline = new Timeline();
     TranslateTransition surfaceTransition = new TranslateTransition();
     TranslateTransition backgroundTransition = new TranslateTransition();
     RotateTransition rotate = new RotateTransition();
@@ -203,10 +203,13 @@ public class MainSimulationController implements Initializable {
         
 
 
-        timeline = new Timeline(frame);
+        // timeline = new Timeline(frame);
+        timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        // timeline.getKeyFrames().clear();
         disableForceController(false);
+        System.out.println(timeline.getKeyFrames().size());
     }
     
     public void disableForceController(boolean b) {

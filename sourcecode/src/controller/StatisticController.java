@@ -66,7 +66,13 @@ public class StatisticController implements Initializable {
         VelocityText.setText(null);
         AccelerationText.setText(null);
         PositionText.setText(null);
-
+        ForceBox.setSelected(false);
+        SumForceBox.setSelected(false);
+        ValueBox.setSelected(false);
+        MassBox.setSelected(false);
+        VelocityBox.setSelected(false);
+        AccelerationBox.setSelected(false);
+        PositionBox.setSelected(false);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
