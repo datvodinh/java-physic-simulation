@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="background" fitHeight="700.0" fitWidth="2560.0" layoutX="-1280.0" pickOnBounds="true">
          <image>
-            <Image url="@../img/background.png" />
+            <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="surface" fitHeight="300.0" fitWidth="2560.0" layoutX="-1280.0" layoutY="400.0" pickOnBounds="true" AnchorPane.topAnchor="400.0">

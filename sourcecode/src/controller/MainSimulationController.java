@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -66,7 +65,7 @@ public class MainSimulationController implements Initializable {
     FrictionForce frictionForce;
 
     KeyFrame frame;
-    Timeline timeline = new Timeline();
+    Timeline timeline;
     TranslateTransition surfaceTransition = new TranslateTransition();
     TranslateTransition backgroundTransition = new TranslateTransition();
     RotateTransition rotate = new RotateTransition();
@@ -108,6 +107,15 @@ public class MainSimulationController implements Initializable {
     }
     
     public void onObjectInitialized() throws Exception {
+        if (timeline != null) {
+            timeline.pause();
+            timeline.getKeyFrames().clear();
+        }
+
+        if (rotate != null) {
+            rotate.pause();
+            mainObject.setRotate(0);
+        }
         if (dragDropController.is_cube) {
             mainCube = dragDropController.MainCube;
             forceSimulation = new ForceSimulation(mainCube, mainSurface, appliedForce);
@@ -203,13 +211,12 @@ public class MainSimulationController implements Initializable {
         
 
 
-        // timeline = new Timeline(frame);
-        timeline.getKeyFrames().add(frame);
+        timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        // timeline.getKeyFrames().clear();
         disableForceController(false);
-        System.out.println(timeline.getKeyFrames().size());
+        // cube.setDisable(true);
+        // cylinder.setDisable(true);
     }
     
     public void disableForceController(boolean b) {
@@ -289,9 +296,13 @@ public class MainSimulationController implements Initializable {
         if (timeline!=null) {timeline.pause();}
         surfaceTransition.pause();
         backgroundTransition.pause();
+        rotate.pause();
         if (dragDropController.is_cylinder) {
             rotate.pause();
         }
+        timeline.getKeyFrames().clear();
+        cube.setDisable(false);
+        cylinder.setDisable(false);
 
     }
     
