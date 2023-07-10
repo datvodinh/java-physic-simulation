@@ -1,9 +1,5 @@
-package model.simulation;
+package model.force;
 import model.surface.Surface;
-import model.force.AppliedForce;
-import model.force.Force;
-import model.force.FrictionForce;
-import model.force.Vector;
 import model.object.MainObject;
 public class ForceSimulation {
 	private MainObject mainObject;

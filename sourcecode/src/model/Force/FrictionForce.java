@@ -1,8 +1,8 @@
-package model.Force;
-import model.Object.Cube;
-import model.Object.Cylinder;
-import model.Object.MainObject;
-import model.Surface.Surface;
+package model.force;
+import model.object.Cube;
+import model.object.Cylinder;
+import model.object.MainObject;
+import model.surface.Surface;
 public class FrictionForce extends Force{
 	public FrictionForce(double magnitude) {
 		super(magnitude);

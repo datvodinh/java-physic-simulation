@@ -1,4 +1,4 @@
-package model.Force;
+package model.force;
 
 public class AppliedForce extends Force {
 	public static final double ABSOLUTE_MAX_APPLIEDFORCE=6996;
