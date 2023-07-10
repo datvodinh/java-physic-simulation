@@ -1,9 +1,5 @@
-package model;
+package model.force;
 import model.surface.Surface;
-import model.force.AppliedForce;
-import model.force.Force;
-import model.force.FrictionForce;
-import model.force.Vector;
 import model.object.MainObject;
 public class ForceSimulation {
 	private MainObject mainObject;
@@ -75,22 +71,26 @@ public class ForceSimulation {
 	public Force getAppliedForce() {
 		return appliedForce;
 	}
-	public void setAppliedForce(Force appliedForce) {
-		if (this.appliedForce.getMagnitude()*appliedForce.getMagnitude()<0) {
+	public void setAppliedForce(double appliedForce) {
+		if (this.appliedForce.getMagnitude()*appliedForce<0) {
 			frictionForce.setMagnitude(-frictionForce.getMagnitude());
 		}
-		this.appliedForce.setMagnitude(appliedForce.getMagnitude());
+		this.appliedForce.setMagnitude(appliedForce);
 		setNetForce();
 	}
+
 	public Force getFrictionForce() {
 		return frictionForce;
 	}
+	
+	public void setFrictionForce() {
+		frictionForce.setFrictionForce();
+	}
+
 	public Force getNetForce() {
 		return netForce;
 	}
-	public void updateObjAcc() {
-		getMainObject().updateAcc(getNetForce());
-	}
+	
 	public void applyForceInTime(double t) {
 		getMainObject().applyForceInTime(getNetForce(), getFrictionForce(), t);
 	}
