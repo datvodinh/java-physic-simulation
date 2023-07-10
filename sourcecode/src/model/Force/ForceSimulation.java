@@ -1,6 +1,6 @@
 package model.force;
-import model.object.MainObject;
 import model.surface.Surface;
+import model.object.MainObject;
 public class ForceSimulation {
 	private MainObject mainObject;
 	private Surface surface;
@@ -85,7 +85,7 @@ public class ForceSimulation {
 	public Force getNetForce() {
 		return netForce;
 	}
-	
+
 	public void applyForceInTime(double t) {
 		getMainObject().applyForceInTime(getNetForce(), getFrictionForce(), t);
 	}
