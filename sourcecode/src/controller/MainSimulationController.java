@@ -37,7 +37,7 @@ public class MainSimulationController implements Initializable {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private ImageView cube, cylinder, mainObject, surface, background;
+    private ImageView cube, cylinder, mainObject, surfaceView,surface, cloud1, cloud2, cloud3, cloud4;
     @FXML
     private GridPane grid;
     @FXML
@@ -67,7 +67,11 @@ public class MainSimulationController implements Initializable {
     KeyFrame frame;
     Timeline timeline;
     TranslateTransition surfaceTransition = new TranslateTransition();
-    TranslateTransition backgroundTransition = new TranslateTransition();
+    TranslateTransition cloudTransition1 = new TranslateTransition();
+    TranslateTransition cloudTransition2 = new TranslateTransition();
+    TranslateTransition cloudTransition3 = new TranslateTransition();
+    TranslateTransition cloudTransition4 = new TranslateTransition();
+
     RotateTransition rotate = new RotateTransition();
 
     
@@ -121,8 +125,10 @@ public class MainSimulationController implements Initializable {
             forceSimulation = new ForceSimulation(mainCube, mainSurface, appliedForce);
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
                 animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
-                animation.setMovement(backgroundTransition, background, mainCube.getVelocity() / 20,
-                        mainPane.getWidth());
+                animation.setMovement(cloudTransition1, cloud1, mainCube.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition2, cloud2, mainCube.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition3, cloud3, mainCube.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition4, cloud4, mainCube.getVelocity() / 50,mainPane.getWidth());
                 try {
                     forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
                     forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
@@ -170,7 +176,10 @@ public class MainSimulationController implements Initializable {
 
             frame = new KeyFrame(Duration.seconds(0.2), event -> {
                 animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
-                animation.setMovement(backgroundTransition, background, mainCylinder.getVelocity() / 20,mainPane.getWidth());
+                animation.setMovement(cloudTransition1, cloud1, mainCylinder.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition2, cloud2, mainCylinder.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition3, cloud3, mainCylinder.getVelocity() / 50, mainPane.getWidth());
+                animation.setMovement(cloudTransition4, cloud4, mainCylinder.getVelocity() / 50,mainPane.getWidth());
                 animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
                 try {
                     forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
@@ -295,7 +304,12 @@ public class MainSimulationController implements Initializable {
         cylinder.setVisible(true);
         if (timeline!=null) {timeline.pause();}
         surfaceTransition.pause();
-        backgroundTransition.pause();
+        cloudTransition1.pause();
+        cloudTransition2.pause();
+        cloudTransition3.pause();
+        cloudTransition4.pause();
+
+                                
         rotate.pause();
         if (dragDropController.is_cylinder) {
             rotate.pause();
@@ -308,7 +322,10 @@ public class MainSimulationController implements Initializable {
     
     public void play() {
         surfaceTransition.play();
-        backgroundTransition.play();
+        cloudTransition1.play();
+        cloudTransition2.play();
+        cloudTransition3.play();
+        cloudTransition4.play();
         if (dragDropController.is_cylinder) {
             rotate.play();
         }
@@ -318,7 +335,10 @@ public class MainSimulationController implements Initializable {
 
     public void pause() {
         surfaceTransition.pause();
-        backgroundTransition.pause();
+        cloudTransition1.pause();
+        cloudTransition2.pause();
+        cloudTransition3.pause();
+        cloudTransition4.pause();
         if (dragDropController.is_cylinder) {
             rotate.pause();
         }

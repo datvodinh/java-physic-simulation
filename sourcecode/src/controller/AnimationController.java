@@ -6,6 +6,19 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class AnimationController {
+
+    public TranslateTransition setTransition(Node node, double duration, double x_from, double x_to) {
+        TranslateTransition transition = new TranslateTransition();
+        transition.setDuration((Duration.seconds(duration)));
+        transition.setByX(0);
+        transition.setFromX(x_from);
+        transition.setToX(x_to);
+        transition.setNode(node);
+        transition.setInterpolator(Interpolator.LINEAR);
+        // transition.play();
+        return transition;
+    }
+
     public void setMovement(TranslateTransition transition, Node node, double rate, double screenWidth) {
         transition.setDuration((Duration.seconds(50)));
         transition.setByX(0);
@@ -21,6 +34,8 @@ public class AnimationController {
         transition.setRate(rate);
         transition.play();
     }
+
+
 
     public void setRotate(RotateTransition rotate, Node node, double rate) {
 
