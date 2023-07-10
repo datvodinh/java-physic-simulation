@@ -12,10 +12,12 @@ public class MainSimulation extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainSimulation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
         Parent root = loader.load();
         primaryStage.getIcons().add(new Image("img/appIcon.png"));
-        Scene scene = new Scene(root,1280,700);
+        Scene scene = new Scene(root, 1280, 700);
+        String cssFile = getClass().getResource("/css/style.css").toExternalForm();
+        scene.getStylesheets().add(cssFile);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
