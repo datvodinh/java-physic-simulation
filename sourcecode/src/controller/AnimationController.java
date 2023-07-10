@@ -28,6 +28,11 @@ public class AnimationController {
         rotate.setCycleCount(TranslateTransition.INDEFINITE);
         rotate.setDuration((Duration.millis(20000.0)));
         rotate.setByAngle(360.0);
+        rotate.setOnFinished(event -> {
+            // Reset the position of surface when it slides off the screen
+            rotate.play();
+
+        });
         rotate.setAutoReverse(false);
         rotate.setInterpolator(Interpolator.LINEAR);
         rotate.setDelay(Duration.seconds(0));
