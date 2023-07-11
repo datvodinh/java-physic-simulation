@@ -96,22 +96,22 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="cloud2" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@../img/cloud.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="cloud3" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../img/cloud.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="cloud1" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true">
+            <ImageView fx:id="cloud2" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@../img/cloud.png" />
                </image>
             </ImageView>
             <ImageView fx:id="cloud4" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../img/cloud.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cloud1" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true">
                <image>
                   <Image url="@../img/cloud.png" />
                </image>
