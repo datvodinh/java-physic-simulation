@@ -1,8 +1,8 @@
-package model.Force;
-import model.Object.Cube;
-import model.Object.Cylinder;
-import model.Object.MainObject;
-import model.Surface.Surface;
+package model.force;
+import model.object.Cube;
+import model.object.Cylinder;
+import model.object.MainObject;
+import model.surface.Surface;
 public class FrictionForce extends Force{
 	public FrictionForce(double magnitude) {
 		super(magnitude);
@@ -28,19 +28,24 @@ public class FrictionForce extends Force{
 				}
 			}
 
-            if (mainObject instanceof Cube) {
-                if (appliedForceValue <= surface.getStaticCoef() * normalForce) {
-                    setMagnitude(direction*appliedForce.getMagnitude()); // Set the friction force magnitude as positive
-                } else {
-                    setMagnitude(direction*normalForce * (surface.getKineticCoef())); // Set the friction force magnitude as positive
-                }
-            } else if (mainObject instanceof Cylinder) {
-                if (appliedForceValue <= 3 * surface.getStaticCoef() * normalForce && appliedForceValue > 0) {
-                    setMagnitude(direction*appliedForce.getMagnitude() / 3); // Set the friction force magnitude as positive
-                } else {
-                    setMagnitude(direction*surface.getKineticCoef() * normalForce); // Set the friction force magnitude as positive
-                }
-            }
+			if (appliedForceValue != 0) {
+				if (mainObject instanceof Cube) {
+					if (appliedForceValue <= surface.getStaticCoef() * normalForce) {
+						setMagnitude(direction * appliedForce.getMagnitude()); // Set the friction force magnitude as positive
+					} else {
+						setMagnitude(direction * normalForce * (surface.getKineticCoef())); // Set the friction force magnitude as positive
+					}
+				} else if (mainObject instanceof Cylinder) {
+					if (appliedForceValue <= 3 * surface.getStaticCoef() * normalForce && appliedForceValue > 0) {
+						setMagnitude(direction * appliedForce.getMagnitude() / 3); // Set the friction force magnitude as positive
+					} else {
+						setMagnitude(direction * surface.getKineticCoef() * normalForce); // Set the friction force magnitude as positive
+					}
+				}
+			}
+			else {
+				setMagnitude(direction * surface.getKineticCoef() * normalForce);
+			}
         }
 	}
 

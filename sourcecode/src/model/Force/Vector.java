@@ -1,4 +1,4 @@
-package model.Force;
+package model.force;
 
 
 import javafx.beans.property.BooleanProperty;

@@ -20,9 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
-import model.Object.Cube;
-import model.Object.Cylinder;
-import model.Object.MainObject;
+import model.object.Cube;
+import model.object.Cylinder;
+import model.object.MainObject;
 
 public class DragDropController {
 
@@ -178,7 +178,7 @@ public class DragDropController {
                 this.is_cylinder = false;
                 this.MainCube = new Cube(mass, size);
 
-                myObj.setLayoutY(250 - (scale - 1) * 75);
+                myObj.setLayoutY(300 - (scale - 1) * 100 / 2);
 
                 onObjectInitialized.run();
             } catch (Exception e) {
@@ -270,7 +270,7 @@ public class DragDropController {
                 this.is_cube = false;
                 this.MainCylinder = new Cylinder(mass, size);
 
-                myObj.setLayoutY(250 - (scale - 1) * 75);
+                myObj.setLayoutY(300 - (scale - 1) * 100 / 2);
 
                 onObjectInitialized.run();
             } catch (Exception e) {

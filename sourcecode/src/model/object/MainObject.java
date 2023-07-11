@@ -1,9 +1,9 @@
-package model.Object;
+package model.object;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import model.Force.Force;
+import model.force.Force;
 
 public abstract class MainObject {
     
@@ -40,8 +40,8 @@ public abstract class MainObject {
         this.accel = accel;
     }
 
-    public double updateAcceleration(double netForce) {
-        return netForce / getMass();
+    public void updateAcceleration(double netForce) {
+        setAcceleration(netForce / getMass());
     }
 
     public double getVelocity() {
@@ -83,6 +83,7 @@ public abstract class MainObject {
     }
 
     public void applyForceInTime(Force netforce, Force fForce, double t) {
+        
         updateAcceleration(netforce.getMagnitude());
         updatePosition(t);
 		updateVelocity(t);

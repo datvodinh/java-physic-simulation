@@ -1,4 +1,4 @@
-package model.Force;
+package model.force;
 
 public class Force extends Vector{
 	public Force(double magnitude) {

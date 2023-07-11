@@ -11,12 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import model.Surface.Surface;
+import model.surface.Surface;
 
 public class SurfaceController implements Initializable {
     @FXML
-    private Slider KSlider,SSlider;
+    public Slider KSlider,SSlider;
     @FXML
     private TextField KCoeff,SCoeff;
     Surface surface = new Surface();
@@ -52,7 +51,7 @@ public class SurfaceController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                double Kinetic = round(KSlider.getValue(),2);
+                double Kinetic = round(KSlider.getValue(), 2);
                 try {
                     surface.setKineticCoef(Kinetic);
                 } catch (Exception e) {
@@ -60,13 +59,13 @@ public class SurfaceController implements Initializable {
                 }
                 KCoeff.setText(Double.toString(surface.getKineticCoef()));
             }
-            
+
         });
         SSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                double Static = round(SSlider.getValue(),2);
+                double Static = round(SSlider.getValue(), 2);
                 try {
                     surface.setStaticCoef(Static);
                 } catch (Exception e) {
@@ -74,9 +73,20 @@ public class SurfaceController implements Initializable {
                 }
                 SCoeff.setText(Double.toString(surface.getStaticCoef()));
             }
-            
+
         });
     }
 
+    public void reset() {
+        KSlider.setValue(0.25);
+        SSlider.setValue(0.5);
+        KCoeff.setText("0.25");
+        SCoeff.setText("0.5");
+    }
+
+    public void disableFrictionSlider(boolean b) {
+        KSlider.setDisable(b);
+        SSlider.setDisable(b);
+    }
     
 }
