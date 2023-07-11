@@ -68,6 +68,11 @@ public class ForceSimulation {
 	public Surface getSur() {
 		return surface;
 	}
+	public void setSur(Surface surface) {
+		this.surface=surface;
+		frictionForce=new FrictionForce(0,surface,mainObject,appliedForce);
+		setNetForce();
+	}
 	public Force getAppliedForce() {
 		return appliedForce;
 	}
