@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="271.0" style="-fx-background-color: #e6e6fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="271.0" style="-fx-background-color: #e6e6fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CheckBoxController">
    <children>
       <CheckBox fx:id="ForceBox" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Forces">
          <font>
@@ -35,12 +34,5 @@
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-      <TextField fx:id="MassText" editable="false" layoutX="162.0" layoutY="116.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="VelocityText" editable="false" layoutX="162.0" layoutY="151.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="AccelerationText" editable="false" layoutX="162.0" layoutY="186.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="PositionText" editable="false" layoutX="162.0" layoutY="220.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="ValueText" editable="false" layoutX="162.0" layoutY="81.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="SumForceText" editable="false" layoutX="162.0" layoutY="46.0" prefHeight="26.0" prefWidth="101.0" />
-      <TextField fx:id="ForceText" editable="false" layoutX="162.0" layoutY="12.0" prefHeight="26.0" prefWidth="101.0" />
    </children>
 </Pane>

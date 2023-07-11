@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatsController">
+   <children>
+      <Label layoutX="188.0" layoutY="17.0" text="Velocity (m/s)" />
+      <Label layoutX="29.0" layoutY="17.0" text="Acceleration (m/s2)" />
+      <Label layoutX="312.0" layoutY="17.0" text="Position (m)" />
+      <TextField fx:id="AccelerationText" layoutX="39.0" layoutY="44.0" prefHeight="26.0" prefWidth="87.0" />
+      <TextField fx:id="VelocityText" layoutX="183.0" layoutY="44.0" prefHeight="26.0" prefWidth="87.0" />
+      <TextField fx:id="PositionText" layoutX="305.0" layoutY="44.0" prefHeight="23.0" prefWidth="87.0" />
+      <Label layoutX="29.0" layoutY="102.0" text="Angular Acc (rad/s2)" />
+      <Label layoutX="175.0" layoutY="102.0" text="Angular Vel (rad/s)" />
+      <Label layoutX="300.0" layoutY="102.0" text="Angular Pos (rad)" />
+      <TextField fx:id="AngularAccText" layoutX="39.0" layoutY="144.0" prefHeight="26.0" prefWidth="87.0" />
+      <TextField fx:id="AngularVelText" layoutX="182.0" layoutY="144.0" prefHeight="26.0" prefWidth="87.0" />
+      <TextField fx:id="AngularPosText" layoutX="305.0" layoutY="144.0" prefHeight="23.0" prefWidth="87.0" />
+   </children>
+</Pane>

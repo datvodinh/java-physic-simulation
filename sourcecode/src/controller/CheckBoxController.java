@@ -7,25 +7,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
-public class StatisticController implements Initializable {
+public class CheckBoxController implements Initializable {
     @FXML
     private CheckBox ForceBox,SumForceBox,MassBox,VelocityBox,AccelerationBox,PositionBox,ValueBox;
     @FXML
-    private TextField MassText,VelocityText,AccelerationText,PositionText,ValueText,SumForceText,ForceText;
+
     public CheckBox getForceBox() {
         return ForceBox;
     }
     public CheckBox getSumForceBox() {
         return SumForceBox;
-    }
-    public TextField getValueText() {
-        return ValueText;
-    }
-    public TextField getSumForceText() {
-        return SumForceText;
-    }
-    public TextField getForceText() {
-        return ForceText;
     }
     public CheckBox getMassBox() {
         return MassBox;
@@ -42,27 +33,8 @@ public class StatisticController implements Initializable {
     public CheckBox getValueBox() {
         return ValueBox;
     }
-    public TextField getMassText() {
-        return MassText;
-    }
-    public TextField getVelocityText() {
-        return VelocityText;
-    }
-    public TextField getAccelerationText() {
-        return AccelerationText;
-    }
-
-    public TextField getPositionText() {
-        return PositionText;
-    }
     public void reset(){
-        ForceText.setText(null);
-        SumForceText.setText(null);
-        ValueText.setText(null);
-        MassText.setText(null);
-        VelocityText.setText(null);
-        AccelerationText.setText(null);
-        PositionText.setText(null);
+        
         ForceBox.setSelected(false);
         SumForceBox.setSelected(false);
         ValueBox.setSelected(false);

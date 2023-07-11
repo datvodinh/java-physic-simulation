@@ -29,6 +29,7 @@ import model.force.ForceSimulation;
 import model.force.FrictionForce;
 import model.object.Cube;
 import model.object.Cylinder;
+import model.object.MainObject;
 import model.surface.Surface;
 
 
@@ -50,7 +51,9 @@ public class MainSimulationController implements Initializable {
     @FXML
     private SurfaceController surfaceController;
     @FXML
-    private StatisticController statisticController;
+    private CheckBoxController checkBoxController;
+    @FXML
+    private StatsController statsController;
     AnimationController animation = new AnimationController();
     DragDropController dragDropController = new DragDropController();
 
@@ -77,7 +80,8 @@ public class MainSimulationController implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        loadStatistic();
+        loadCheckBox();
+        loadStats();
         loadSurfacePanel();
         disableForceController(true);
 
@@ -110,6 +114,28 @@ public class MainSimulationController implements Initializable {
 
     }
     
+    private void loadStats() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/Stats.fxml"));
+
+            statisticPane = (Pane) loader.load();
+            statisticPane.setScaleX(1.0);
+            statisticPane.setScaleY(1.0);
+
+            AnchorPane.setTopAnchor(statisticPane, 20.0);
+            AnchorPane.setLeftAnchor(statisticPane, 10.0);
+
+            mainPane.getChildren().add(statisticPane);
+            this.statsController = loader.getController();
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void onObjectInitialized() throws Exception {
         if (timeline != null) {
             timeline.pause();
@@ -136,30 +162,31 @@ public class MainSimulationController implements Initializable {
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
                     forceSimulation.applyForceInTime(0.2);
-                    if (statisticController.getMassBox().isSelected()){
-                        statisticController.getMassText().setText(Double.toString(mainCube.getMass()));
-                    }
-                    else{
-                        statisticController.getMassText().setText(null);
-                    }
-                    if (statisticController.getVelocityBox().isSelected()){
-                        statisticController.getVelocityText().setText(Double.toString(mainCube.getVelocity()));
-                    }
-                    else{
-                        statisticController.getVelocityText().setText(null);
-                    }
-                    if (statisticController.getAccelerationBox().isSelected()){
-                        statisticController.getAccelerationText().setText(Double.toString(mainCube.getAcceleration()));
-                    }
-                    else{
-                        statisticController.getAccelerationText().setText(null);
-                    }
-                    if (statisticController.getPositionBox().isSelected()){
-                        statisticController.getPositionText().setText((Double.toString(mainCube.getPosition())));
-                    }
-                    else{
-                        statisticController.getPositionText().setText(null);
-                    }
+                    showStats();
+                    // if (checkBoxController.getMassBox().isSelected()){
+                    //     // checkBoxController.getMassText().setText(Double.toString(mainCube.getMass()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getMassText().setText(null);
+                    // }
+                    // if (checkBoxController.getVelocityBox().isSelected()){
+                    //     // checkBoxController.getVelocityText().setText(Double.toString(mainCube.getVelocity()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getVelocityText().setText(null);
+                    // }
+                    // if (checkBoxController.getAccelerationBox().isSelected()){
+                    //     // checkBoxController.getAccelerationText().setText(Double.toString(mainCube.getAcceleration()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getAccelerationText().setText(null);
+                    // }
+                    // if (checkBoxController.getPositionBox().isSelected()){
+                    //     // checkBoxController.getPositionText().setText((Double.toString(mainCube.getPosition())));
+                    // }
+                    // else{
+                    //     // checkBoxController.getPositionText().setText(null);
+                    // }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -169,7 +196,7 @@ public class MainSimulationController implements Initializable {
             });
             
 
-        } else {
+        } else { //Cylinder
             mainCylinder = dragDropController.MainCylinder;
 
             forceSimulation = new ForceSimulation(mainCylinder, mainSurface, appliedForce);
@@ -188,30 +215,32 @@ public class MainSimulationController implements Initializable {
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
                     forceSimulation.applyForceInTime(0.2);
-                    if (statisticController.getMassBox().isSelected()){
-                        statisticController.getMassText().setText(Double.toString(mainCylinder.getMass()));
-                    }
-                    else{
-                        statisticController.getMassText().setText(null);
-                    }
-                    if (statisticController.getVelocityBox().isSelected()){
-                        statisticController.getVelocityText().setText(Double.toString(mainCylinder.getVelocity()));
-                    }
-                    else{
-                        statisticController.getVelocityText().setText(null);
-                    }
-                    if (statisticController.getAccelerationBox().isSelected()){
-                        statisticController.getAccelerationText().setText(Double.toString(mainCylinder.getAcceleration()));
-                    }
-                    else{
-                        statisticController.getAccelerationText().setText(null);
-                    }
-                    if (statisticController.getPositionBox().isSelected()){
-                        statisticController.getPositionText().setText(Double.toString(mainCylinder.getPosition()));
-                    }
-                    else{
-                        statisticController.getPositionText().setText(null);
-                    }
+                    showStats();
+                    // if (checkBoxController.getMassBox().isSelected()){
+                    //     // checkBoxController.getMassText().setText(Double.toString(mainCylinder.getMass()));
+                        
+                    // }
+                    // else{
+                    //     // checkBoxController.getMassText().setText(null);
+                    // }
+                    // if (checkBoxController.getVelocityBox().isSelected()){
+                    //     // checkBoxController.getVelocityText().setText(Double.toString(mainCylinder.getVelocity()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getVelocityText().setText(null);
+                    // }
+                    // if (checkBoxController.getAccelerationBox().isSelected()){
+                    //     // checkBoxController.getAccelerationText().setText(Double.toString(mainCylinder.getAcceleration()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getAccelerationText().setText(null);
+                    // }
+                    // if (checkBoxController.getPositionBox().isSelected()){
+                    //     // checkBoxController.getPositionText().setText(Double.toString(mainCylinder.getPosition()));
+                    // }
+                    // else{
+                    //     // checkBoxController.getPositionText().setText(null);
+                    // }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -228,6 +257,31 @@ public class MainSimulationController implements Initializable {
         // cylinder.setDisable(true);
     }
     
+    private void showStats() {
+        if (checkBoxController.getMassBox().isSelected()){
+            //show mass
+        }
+        if (dragDropController.is_cube){ //cube
+            statsController.getVelocityText().setText(Double.toString(dragDropController.MainCube.getVelocity()));
+            statsController.getAccelerationText().setText(Double.toString(dragDropController.MainCube.getAcceleration()));
+            statsController.getPositionText().setText(Double.toString(dragDropController.MainCube.getPosition()));
+        
+        }
+        else{ //cylinder
+
+                statsController.getVelocityText().setText(Double.toString(dragDropController.MainCylinder.getVelocity()));
+                statsController.getAngularVelText().setText(Double.toString(dragDropController.MainCylinder.getAngularVel()));
+
+                statsController.getAccelerationText().setText(Double.toString(dragDropController.MainCylinder.getAcceleration()));
+                statsController.getAngularAccText().setText(Double.toString(dragDropController.MainCylinder.getGamma()));
+
+
+                statsController.getPositionText().setText(Double.toString(dragDropController.MainCylinder.getPosition()));
+                statsController.getAngularPosText().setText(Double.toString(dragDropController.MainCylinder.getAngularPos()));
+
+        }
+    }
+
     public void disableForceController(boolean b) {
         forceSlider.setDisable(b);
         increaseForce.setDisable(b);
@@ -236,11 +290,11 @@ public class MainSimulationController implements Initializable {
     }
 
 
-    public void loadStatistic() {
+    public void loadCheckBox() {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/StatsPanel.fxml"));
+            loader.setLocation(getClass().getResource("/view/CheckBox.fxml"));
 
             statisticPane = (Pane) loader.load();
             statisticPane.setScaleX(0.9);
@@ -250,7 +304,7 @@ public class MainSimulationController implements Initializable {
             AnchorPane.setRightAnchor(statisticPane, 35.0);
 
             mainPane.getChildren().add(statisticPane);
-            this.statisticController = loader.getController();
+            this.checkBoxController = loader.getController();
             
 
         } catch (IOException e) {
@@ -299,7 +353,7 @@ public class MainSimulationController implements Initializable {
         mainObject.setImage(null);
         forceSlider.setValue(0);
         surfaceController.reset();
-        statisticController.reset();
+        checkBoxController.reset();
         cube.setVisible(true);
         cylinder.setVisible(true);
         if (timeline!=null) {timeline.pause();}
