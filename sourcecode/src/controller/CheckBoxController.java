@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
-public class StatisticController implements Initializable {
+public class CheckBoxController implements Initializable {
     @FXML
     private CheckBox ForceBox,SumForceBox,MassBox,VelocityBox,AccelerationBox,PositionBox,ValueBox;
     @FXML

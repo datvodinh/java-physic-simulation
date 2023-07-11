@@ -51,7 +51,7 @@ public class MainSimulationController implements Initializable {
     @FXML
     private SurfaceController surfaceController;
     @FXML
-    private StatisticController statisticController;
+    private CheckBoxController statisticController;
     AnimationController animation = new AnimationController();
     DragDropController dragDropController = new DragDropController();
 
