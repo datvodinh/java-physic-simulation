@@ -156,8 +156,7 @@ public class MainSimulationController implements Initializable {
                 animation.setMovement(cloudTransition3, cloud3, mainCube.getVelocity() / 50, mainPane.getWidth());
                 animation.setMovement(cloudTransition4, cloud4, mainCube.getVelocity() / 50,mainPane.getWidth());
                 try {
-                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
-                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
+                    forceSimulation.setSur(new Surface(surfaceController.getSSlider().getValue(),surfaceController.getKSlider().getValue()));
                     forceSimulation.setAppliedForce(forceSlider.getValue());
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
@@ -209,8 +208,7 @@ public class MainSimulationController implements Initializable {
                 animation.setMovement(cloudTransition4, cloud4, mainCylinder.getVelocity() / 50,mainPane.getWidth());
                 animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
                 try {
-                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
-                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
+                    forceSimulation.setSur(new Surface(surfaceController.getSSlider().getValue(),surfaceController.getKSlider().getValue()));
                     forceSimulation.setAppliedForce(forceSlider.getValue());
                     forceSimulation.setFrictionForce();
                     forceSimulation.setNetForce();
