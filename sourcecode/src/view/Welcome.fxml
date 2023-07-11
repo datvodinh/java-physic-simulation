@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomePage">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1280.0" pickOnBounds="true" styleClass="my-image">
@@ -73,11 +72,34 @@
             <GaussianBlur />
          </effect>
       </GridPane>
-      <Label layoutX="327.0" layoutY="99.0" text="Physic simulation">
+      <Label layoutX="317.0" layoutY="101.0" text="Physic Simulation">
          <font>
             <Font name="Consolas" size="69.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="227.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="surface" fitHeight="200.0" fitWidth="2560.0" layoutX="-1280.0" layoutY="500.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/surface.png" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="217.0" layoutY="349.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/cube.png" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="cylinder" fitHeight="150.0" fitWidth="150.0" layoutX="863.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/cylinder.png" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
    </children>
 </AnchorPane>
