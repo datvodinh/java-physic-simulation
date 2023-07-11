@@ -1,5 +1,5 @@
 
-	package model.Force;
+package model.Force;
 import model.Surface.Surface;
 import model.object.MainObject;
 public class ForceSimulation {
