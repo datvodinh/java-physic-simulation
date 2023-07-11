@@ -74,7 +74,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="mainObject" fitHeight="150.0" fitWidth="150.0" layoutX="565.0" layoutY="250.0" pickOnBounds="true" />
+      <ImageView fx:id="mainObject" fitHeight="100.0" fitWidth="100.0" layoutX="590.0" layoutY="300.0" pickOnBounds="true" />
       <Button fx:id="decreaseForce" layoutX="465.0" layoutY="545.0" mnemonicParsing="false" onAction="#decreaseForce" prefHeight="50.0" prefWidth="50.0" text="◀◀">
          <font>
             <Font size="20.0" />
@@ -119,6 +119,7 @@
          </children>
       </GridPane>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="LAVENDER" height="260.0" layoutX="974.0" layoutY="25.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="275.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="200.0" layoutX="20.0" layoutY="20.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="400.0" />
 
    </children>
 </AnchorPane>

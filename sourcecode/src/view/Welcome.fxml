@@ -85,7 +85,7 @@
             <GaussianBlur />
          </effect>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="217.0" layoutY="349.0" pickOnBounds="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="217.0" layoutY="350.0" pickOnBounds="true">
          <image>
             <Image url="@../img/cube.png" />
          </image>
@@ -93,7 +93,7 @@
             <GaussianBlur />
          </effect>
       </ImageView>
-      <ImageView fx:id="cylinder" fitHeight="150.0" fitWidth="150.0" layoutX="863.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cylinder" fitHeight="150.0" fitWidth="150.0" layoutX="863.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/cylinder.png" />
          </image>
