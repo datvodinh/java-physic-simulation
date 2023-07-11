@@ -78,10 +78,10 @@ public class SurfaceController implements Initializable {
     }
 
     public void reset() {
-        KSlider.setValue(0);
-        SSlider.setValue(0);
-        KCoeff.setText("0");
-        SCoeff.setText("0");
+        KSlider.setValue(0.25);
+        SSlider.setValue(0.5);
+        KCoeff.setText("0.25");
+        SCoeff.setText("0.5");
     }
 
     public void disableFrictionSlider(boolean b) {
