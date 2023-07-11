@@ -178,7 +178,7 @@ public class DragDropController {
                 this.is_cylinder = false;
                 this.MainCube = new Cube(mass, size);
 
-                myObj.setLayoutY(myObj.getLayoutY() - (scale - 1) * myObj.getFitHeight() / 2);
+                myObj.setLayoutY(300 - (scale - 1) * 100 / 2);
 
                 onObjectInitialized.run();
             } catch (Exception e) {
@@ -270,7 +270,7 @@ public class DragDropController {
                 this.is_cube = false;
                 this.MainCylinder = new Cylinder(mass, size);
 
-                myObj.setLayoutY(myObj.getLayoutY() - (scale - 1) * myObj.getFitHeight() / 2);
+                myObj.setLayoutY(300 - (scale - 1) * 100 / 2);
 
                 onObjectInitialized.run();
             } catch (Exception e) {
