@@ -8,7 +8,7 @@ public class Cylinder extends MainObject {
     private double radius = MIN_RADIUS;
     private double angularPos = 0;
     private double angularVel = 0;
-    private double gamma;
+    private double gamma = 0;
 
     public Cylinder() throws Exception {
         super();
@@ -62,7 +62,7 @@ public class Cylinder extends MainObject {
 
 
     public void setGamma(double friction) {
-        this.gamma = friction / (1 / 2 * getMass() * Math.pow(getRadius(), 2));
+        this.gamma = friction * 2 / (getMass() * getRadius() * getRadius());
     }
 
     public void updateAngularVel(double friction, double delta_t) {
@@ -71,16 +71,16 @@ public class Cylinder extends MainObject {
     }
     
     public void updateAngularPos(double delta_t) {
-        setAngularPos(getAngularPos()+ getAngularVel() * delta_t);
+        setAngularPos(getAngularPos() + getAngularVel() * delta_t);
     }
     
+    @Override
     public void applyForceInTime(Force netforce, Force fForce, double t) {
             updateAcceleration(netforce.getMagnitude());
             updatePosition(t);
             updateVelocity(t);
             updateAngularPos(t);
-            updateAngularVel(fForce.getAbsoluteMagnitude(), t);
-            
+            updateAngularVel(-fForce.getMagnitude(), t);
         }
         
 

@@ -62,8 +62,6 @@ public class MainSimulationController implements Initializable {
     Pane statisticPane;
     Pane forcePane;
 
-    Cube mainCube;
-    Cylinder mainCylinder;
     ForceSimulation forceSimulation;
     Surface mainSurface = new Surface();
     AppliedForce appliedForce = new AppliedForce(0);
@@ -150,58 +148,17 @@ public class MainSimulationController implements Initializable {
             mainObject.setRotate(0);
         }
         if (dragDropController.is_cube) {
-            mainCube = dragDropController.MainCube;
-            forceSimulation = new ForceSimulation(mainCube, mainSurface, appliedForce);
-            frame = new KeyFrame(Duration.seconds(0.2), event -> {
-                animation.setMovement(surfaceTransition, surface, mainCube.getVelocity(), mainPane.getWidth());
-                animation.setMovement(cloudTransition1, cloud1, mainCube.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition2, cloud2, mainCube.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition3, cloud3, mainCube.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition4, cloud4, mainCube.getVelocity() / 50,mainPane.getWidth());
-                try {
-                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
-                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
-                    forceSimulation.setAppliedForce(forceSlider.getValue());
-                    forceSimulation.setFrictionForce();
-                    forceSimulation.setNetForce();
-                    forceSimulation.applyForceInTime(0.2);
-                    showStats();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
-
-            });
-            
-
-        } else { //Cylinder
-            mainCylinder = dragDropController.MainCylinder;
-
-            forceSimulation = new ForceSimulation(mainCylinder, mainSurface, appliedForce);
-
-            frame = new KeyFrame(Duration.seconds(0.2), event -> {
-                animation.setMovement(surfaceTransition, surface, mainCylinder.getVelocity(), mainPane.getWidth());
-                animation.setMovement(cloudTransition1, cloud1, mainCylinder.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition2, cloud2, mainCylinder.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition3, cloud3, mainCylinder.getVelocity() / 50, mainPane.getWidth());
-                animation.setMovement(cloudTransition4, cloud4, mainCylinder.getVelocity() / 50,mainPane.getWidth());
-                animation.setRotate(rotate, mainObject, mainCylinder.getVelocity());
-                try {
-                    forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
-                    forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
-                    forceSimulation.setAppliedForce(forceSlider.getValue());
-                    forceSimulation.setFrictionForce();
-                    forceSimulation.setNetForce();
-                    forceSimulation.applyForceInTime(0.2);
-                    showStats();
-                    
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+            forceSimulation = new ForceSimulation(dragDropController.MainCube, mainSurface, appliedForce);
+            frame = new KeyFrame(Duration.seconds(0.05), event -> {
+                mainKeyFrame(dragDropController.MainCube, false);});
         }
-        
 
+        else { //Cylinder
+            forceSimulation = new ForceSimulation(dragDropController.MainCylinder, mainSurface, appliedForce);
+
+            frame = new KeyFrame(Duration.seconds(0.05), event -> {
+                mainKeyFrame(dragDropController.MainCylinder, true);});
+        }
 
         timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -209,6 +166,28 @@ public class MainSimulationController implements Initializable {
         disableForceController(false);
         // cube.setDisable(true);
         // cylinder.setDisable(true);
+    }
+
+    private void mainKeyFrame(MainObject object, boolean is_rotate) {
+        animation.setMovement(surfaceTransition, surface, object.getVelocity(), mainPane.getWidth());
+        animation.setMovement(cloudTransition1, cloud1, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition2, cloud2, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition3, cloud3, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition4, cloud4, object.getVelocity() / 50, mainPane.getWidth());
+        if (is_rotate) {animation.setRotate(rotate, mainObject, ((Cylinder) object).getAngularVel());}
+        
+        try {
+            forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
+            forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
+            forceSimulation.setAppliedForce(forceSlider.getValue());
+            forceSimulation.setFrictionForce();
+            forceSimulation.setNetForce();
+            forceSimulation.applyForceInTime(0.05);
+            showStats();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     private void showStats() {
@@ -223,14 +202,14 @@ public class MainSimulationController implements Initializable {
             else{
                 mass.setVisible(false);
             }
-            statsController.getVelocityText().setText(Double.toString(dragDropController.MainCube.getVelocity()));
-            statsController.getAccelerationText().setText(Double.toString(dragDropController.MainCube.getAcceleration()));
-            statsController.getPositionText().setText(Double.toString(dragDropController.MainCube.getPosition()));
+            statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCube.getVelocity(),3)));
+            statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCube.getAcceleration(),3)));
+            statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCube.getPosition(),3)));
         
         }
         else{ //cylinder
             if (checkBoxController.getMassBox().isSelected()){
-            mass.setText(Double.toString(dragDropController.MainCylinder.getMass())+" kg");
+            mass.setText(Double.toString(round(dragDropController.MainCylinder.getMass(),3))+" kg");
             mass.setVisible(true);
             mass.setLayoutX(mainObject.getLayoutX() + mainObject.getFitWidth()/2);
             mass.setLayoutY(mainObject.getLayoutY() -  mainObject.getFitHeight());
@@ -238,16 +217,14 @@ public class MainSimulationController implements Initializable {
             else{
                 mass.setVisible(false);
             }
-            statsController.getVelocityText().setText(Double.toString(dragDropController.MainCylinder.getVelocity()));
-            statsController.getAngularVelText().setText(Double.toString(dragDropController.MainCylinder.getAngularVel()));
+            statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCylinder.getVelocity(),3)));
+            statsController.getAngularVelText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularVel(),3)));
 
-            statsController.getAccelerationText().setText(Double.toString(dragDropController.MainCylinder.getAcceleration()));
-            statsController.getAngularAccText().setText(Double.toString(dragDropController.MainCylinder.getGamma()));
+            statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCylinder.getAcceleration(),3)));
+            statsController.getAngularAccText().setText(Double.toString(round(dragDropController.MainCylinder.getGamma(),3)));
 
-
-            statsController.getPositionText().setText(Double.toString(dragDropController.MainCylinder.getPosition()));
-            statsController.getAngularPosText().setText(Double.toString(dragDropController.MainCylinder.getAngularPos()));
-
+            statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCylinder.getPosition(),3)));
+            statsController.getAngularPosText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularPos(),3)));
         }
     }
 
