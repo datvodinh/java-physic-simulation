@@ -26,97 +26,91 @@ import model.object.MainObject;
 
 public class DragDropController {
 
+    // Variables for mouse dragging
     private double xOffset;
     private double yOffset;
-
     private double initialTranslateX;
     private double initialTranslateY;
 
+    // Variables for object initialization
     double init_distance;
     double end_distance;
-
     boolean is_cube = false;
     boolean is_cylinder = false;
-
     double mass;
     double size;
-
     Cube MainCube;
     Cylinder MainCylinder;
 
-
+    // Method to initialize the objects (cube and cylinder)
     @FXML
     void initializeObject(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
-        this.initializeCube(cube,cylinder,myObj,surface,onObjectInitialized);
-        this.initializeCylinder(cube, cylinder, myObj, surface,onObjectInitialized);
+        this.initializeCube(cube, cylinder, myObj, surface, onObjectInitialized);
+        this.initializeCylinder(cube, cylinder, myObj, surface, onObjectInitialized);
     }
 
-
-
-    @FXML void initializeCube(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    // Method to initialize the cube object
+    @FXML
+    void initializeCube(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cube.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cube.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cube.getTranslateY();
-            
             initialTranslateX = cube.getX();
             initialTranslateY = cube.getY();
-
         });
+
         cube.setOnMouseDragged(mouseEvent -> {
             cube.setScaleX(1.5);
             cube.setScaleY(1.5);
             cube.setTranslateX(mouseEvent.getSceneX() - xOffset);
             cube.setTranslateY(mouseEvent.getSceneY() - yOffset);
         });
+
         cube.setOnMouseReleased(mouseEvent -> {
             cube.setScaleX(1);
             cube.setScaleY(1);
             cube.setTranslateX(initialTranslateX);
             cube.setTranslateY(initialTranslateY);
             cube.setVisible(false);
-            cubeInput(cube,cylinder, myObj,surface,onObjectInitialized);
-            
-            
-            
+            cubeInput(cube, cylinder, myObj, surface, onObjectInitialized);
         });
-
-        
     }
 
-    
-    @FXML void initializeCylinder(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
+    // Method to initialize the cylinder object
+    @FXML
+    void initializeCylinder(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         cylinder.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX() - cylinder.getTranslateX();
             yOffset = mouseEvent.getSceneY() - cylinder.getTranslateY();
             initialTranslateX = cylinder.getX();
             initialTranslateY = cylinder.getY();
         });
+
         cylinder.setOnMouseDragged(mouseEvent -> {
             cylinder.setScaleX(1.5);
             cylinder.setScaleY(1.5);
             cylinder.setTranslateX(mouseEvent.getSceneX() - xOffset);
             cylinder.setTranslateY(mouseEvent.getSceneY() - yOffset);
         });
+
         cylinder.setOnMouseReleased(mouseEvent -> {
             cylinder.setScaleX(1);
             cylinder.setScaleY(1);
             cylinder.setVisible(false);
             cylinder.setTranslateX(initialTranslateX);
             cylinder.setTranslateY(initialTranslateY);
-            cylinderInput(cube, cylinder, myObj,surface, onObjectInitialized);
-
+            cylinderInput(cube, cylinder, myObj, surface, onObjectInitialized);
         });
-
-        
     }
 
+    // Method to handle input for the cube object
     private void cubeInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
 
         dialog.setTitle("Input Property for Cube");
-        dialog.setHeaderText("Cube property");
+        dialog.setHeaderText("Cube Property");
 
         ButtonType OKButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(OKButtonType);
@@ -137,8 +131,7 @@ public class DragDropController {
 
         dialogGrid.add(new Label("Cube Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
         dialogGrid.add(cubeMass, 1, 0);
-        dialogGrid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default "
-                + Cube.MAX_SIZE * 0.5 + ")"), 0, 1);
+        dialogGrid.add(new Label("Cube Side: (>= " + Cube.MIN_SIZE + " and <=" + Cube.MAX_SIZE + ", default " + Cube.MAX_SIZE * 0.5 + ")"), 0, 1);
         dialogGrid.add(cubeSide, 1, 1);
         dialogGrid.add(OKButton, 2, 2);
 
@@ -191,7 +184,9 @@ public class DragDropController {
         dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
-                if (!is_cube){cube.setVisible(true);}
+                if (!is_cube) {
+                    cube.setVisible(true);
+                }
             }
         });
 
@@ -199,49 +194,46 @@ public class DragDropController {
         dialog.showAndWait();
     }
 
-    
-
-
+    // Method to handle input for the cylinder object
     private void cylinderInput(ImageView cube, ImageView cylinder, ImageView myObj, ImageView surface, Runnable onObjectInitialized) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
 
         dialog.initStyle(StageStyle.DECORATED);
 
         dialog.setTitle("Input Property for Cylinder");
-        dialog.setHeaderText("Cylinder property");
-    
-        // Set the color for the dialog
-        // dialog.getDialogPane().getStyleClass().add("dialog-pane");
-        GridPane dialogGrid = new GridPane();
+        dialog.setHeaderText("Cylinder Property");
+
         ButtonType OKButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(OKButtonType);
-    
+
+        GridPane dialogGrid = new GridPane();
         dialogGrid.setHgap(10);
         dialogGrid.setVgap(10);
         dialogGrid.setPadding(new Insets(20, 150, 10, 10));
-    
+
         TextField cylinderMass = new TextField();
         cylinderMass.setPromptText("Input mass for cylinder");
-    
+
         TextField cylinderRadius = new TextField();
         cylinderRadius.setPromptText("Input radius for cylinder");
-    
+
         Button OKButton = (Button) dialog.getDialogPane().lookupButton(OKButtonType);
         OKButton.setDisable(true);
+
         dialogGrid.add(new Label("Cylinder Mass: (> 0, default " + MainObject.MASS_DEFAULT + ")"), 0, 0);
         dialogGrid.add(cylinderMass, 1, 0);
         dialogGrid.add(new Label("Cylinder Radius: (>= " + Cylinder.MIN_RADIUS + " and <=" + Cylinder.MAX_RADIUS + ", default " + Cylinder.MAX_RADIUS * 0.5 + ")"), 0, 1);
         dialogGrid.add(cylinderRadius, 1, 1);
         dialogGrid.add(OKButton, 2, 2);
-    
+
         BooleanProperty condition1 = new SimpleBooleanProperty(false);
         BooleanProperty condition2 = new SimpleBooleanProperty(false);
-    
+
         cylinderMass.textProperty().addListener((observable, oldValue, newValue) -> {
             condition1.set(!cylinderMass.getText().isEmpty());
             OKButton.setDisable(!(condition1.get() && condition2.get()));
         });
-    
+
         cylinderRadius.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 double value = Double.parseDouble(cylinderRadius.getText());
@@ -252,7 +244,7 @@ public class DragDropController {
                 OKButton.setDisable(true);
             }
         });
-    
+
         OKButton.setOnAction(event -> {
             try {
                 mass = Double.parseDouble(cylinderMass.getText());
@@ -265,7 +257,7 @@ public class DragDropController {
 
                 cylinder.setVisible(false);
                 cube.setVisible(true);
-                
+
                 this.is_cylinder = true;
                 this.is_cube = false;
                 this.MainCylinder = new Cylinder(mass, size);
@@ -282,14 +274,13 @@ public class DragDropController {
         dialog.setOnCloseRequest((EventHandler<DialogEvent>) new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
-                if (!is_cylinder){cylinder.setVisible(true);}
-                
+                if (!is_cylinder) {
+                    cylinder.setVisible(true);
+                }
             }
         });
-    
+
         dialog.getDialogPane().setContent(dialogGrid);
         dialog.showAndWait();
-        
     }
-
 }
