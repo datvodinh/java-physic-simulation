@@ -109,12 +109,7 @@ public class ForceSimulation {
 
 	// Set the magnitude of the applied force
 	public void setAppliedForce(double appliedForce) {
-		// Update the direction of the friction force if the applied force changes direction
-		if (this.appliedForce.getMagnitude() * appliedForce < 0) {
-			frictionForce.setMagnitude(-frictionForce.getMagnitude());
-		}
 		this.appliedForce.setMagnitude(appliedForce);
-		setNetForce();
 	}
 
 	// Get the friction force between the object and the surface
