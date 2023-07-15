@@ -52,6 +52,30 @@ public class WelcomePage implements Initializable {
         stage.show();
     }
 
+    public void about(ActionEvent event) throws IOException {
+        // Load the new scene from FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/About.fxml"));
+        Parent root = loader.load();
+
+        // Set the new scene on the primary stage
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void back(ActionEvent event) throws IOException {
+        // Load the new scene from FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
+        Parent root = loader.load();
+
+        // Set the new scene on the primary stage
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Performs a translation animation on the given transition with the specified rate.
      *
