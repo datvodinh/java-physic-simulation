@@ -71,4 +71,13 @@ public class StatsController implements Initializable {
         // Any initialization tasks can be performed here.
     }
 
+    public void reset() {
+        AccelerationText.setText("0");
+        VelocityText.setText("0");
+        PositionText.setText("0");
+        AngularAccText.setText("0");
+        AngularVelText.setText("0");
+        AngularPosText.setText("0");
+    }
+
 }
