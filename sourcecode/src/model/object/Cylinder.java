@@ -70,9 +70,20 @@ public class Cylinder extends MainObject {
     }
 
     // Update the angular velocity of the cylinder based on the given friction and time interval
-    public void updateAngularVel(double friction, double delta_t) {
+    public void updateAngularVel(double friction, double delta_t, boolean stop, boolean stop2) {
         setGamma(friction);
-        setAngularVel(getAngularVel() + getGamma() * delta_t);
+        double oldAngVel = getAngularVel();
+        double newAngvel = getAngularVel() + getGamma() * delta_t;
+        if (stop2) {
+            setGamma(0);
+            setAngularVel(0);
+        }
+        else if ((oldAngVel * newAngvel < 0) && stop) {
+            setAngularVel(0);
+        }
+        else {
+            setAngularVel(newAngvel);
+        }
     }
     
     // Update the angular position of the cylinder based on the given time interval
@@ -95,11 +106,17 @@ public class Cylinder extends MainObject {
         
         updateAngularPos(t);
         
-        if (netforce.getMagnitude() != fForce.getMagnitude()) {
-            updateAngularVel(-fForce.getMagnitude(), t);
+        if (netforce.getMagnitude() == fForce.getMagnitude()) {
+            if (getAngularVel() == 0) {
+                updateAngularVel(fForce.getMagnitude(), t, true, true);
+            }
+            else {
+                updateAngularVel(fForce.getMagnitude(), t, true, false);
+            }
+            
         }
         else {
-            updateAngularVel(fForce.getMagnitude(), t);
+            updateAngularVel(-fForce.getMagnitude(), t,false,false);
         }
     }
 }

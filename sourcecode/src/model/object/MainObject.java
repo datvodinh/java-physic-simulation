@@ -8,8 +8,8 @@ import model.force.Force;
 public abstract class MainObject {
     
     public static final double MASS_DEFAULT = 50.0; // Default mass in kilograms
-    public static final double MAX_VEL = 50; // Maximum velocity in m/s
-    public static final double MIN_VEL = -50; // Minimum velocity in m/s
+    public static final double MAX_VEL = 100; // Maximum velocity in m/s
+    public static final double MIN_VEL = -100; // Minimum velocity in m/s
 
     private double mass = MASS_DEFAULT; // Mass of the object
     private double pos = 0; // Position of the object
@@ -71,14 +71,12 @@ public abstract class MainObject {
         }
 
         // The code below can be used to limit the velocity within a specific range
-        /*
         if (newVel > MAX_VEL) {
             setVelocity(MAX_VEL);
         }
         else if (newVel < MIN_VEL) {
             setVelocity(MIN_VEL);
         }
-        */
     }
 
     // Get the position of the object

@@ -1,8 +1,8 @@
-package model.Force;
+package model.force;
 import model.object.Cube;
 import model.object.Cylinder;
 import model.object.MainObject;
-import model.Surface.Surface;
+import model.surface.Surface;
 public class FrictionForce extends Force{
 	public FrictionForce(double magnitude) {
 		super(magnitude);
@@ -27,18 +27,19 @@ public class FrictionForce extends Force{
 					direction = (appliedForce.isRightDirection() == true) ? -1 : 1;
 				}
 			}
-	   if (mainObject instanceof Cube) {
-		if (appliedForceValue <= surface.getStaticCoef() * normalForce) {
-			setMagnitude(-appliedForce.getMagnitude()); // Set the friction force magnitude as positive
-		} else {
-			setMagnitude(direction * normalForce * (surface.getKineticCoef())); // Set the friction force magnitude as positive
-		}
-	} else if (mainObject instanceof Cylinder) {
-		if (appliedForceValue>0 && appliedForceValue <= 3 * surface.getStaticCoef() * normalForce ) {
-			setMagnitude(-appliedForce.getMagnitude() / 3); // Set the friction force magnitude as positive
-		} else {
-			setMagnitude(direction * surface.getKineticCoef() * normalForce); // Set the friction force magnitude as positive
-		}
+			if (mainObject instanceof Cube) {
+				if (appliedForceValue>0 && appliedForceValue <= surface.getStaticCoef() * normalForce) {
+					setMagnitude(-appliedForce.getMagnitude()); // Set the friction force magnitude as positive
+				} else {
+					setMagnitude(direction * normalForce * (surface.getKineticCoef())); // Set the friction force magnitude as positive
+				}
+			
+		} else if (mainObject instanceof Cylinder) {
+			if (appliedForceValue>0 && appliedForceValue <= 3 * surface.getStaticCoef() * normalForce ) {
+				setMagnitude(-appliedForce.getMagnitude() / 3); // Set the friction force magnitude as positive
+			} else {
+				setMagnitude(direction * surface.getKineticCoef() * normalForce); // Set the friction force magnitude as positive
+			}
 	} 
 			
 			

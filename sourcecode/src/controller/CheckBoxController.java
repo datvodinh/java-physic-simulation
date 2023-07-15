@@ -47,9 +47,9 @@ public class CheckBoxController implements Initializable {
         SumForceBox.setSelected(false);
         ValueBox.setSelected(false);
         MassBox.setSelected(false);
-        VelocityBox.setSelected(false);
-        AccelerationBox.setSelected(false);
-        PositionBox.setSelected(false);
+        VelocityBox.setSelected(true);
+        AccelerationBox.setSelected(true);
+        PositionBox.setSelected(true);
     }
 
     @Override

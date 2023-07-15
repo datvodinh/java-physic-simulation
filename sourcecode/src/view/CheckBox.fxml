@@ -22,15 +22,15 @@
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-      <CheckBox fx:id="VelocityBox" layoutX="8.0" layoutY="150.0" mnemonicParsing="false" text="Velocity">
+      <CheckBox fx:id="VelocityBox" layoutX="8.0" layoutY="150.0" mnemonicParsing="false" selected="true" text="Velocity">
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-      <CheckBox fx:id="AccelerationBox" layoutX="8.0" layoutY="185.0" mnemonicParsing="false" text="Acceleration">
+      <CheckBox fx:id="AccelerationBox" layoutX="8.0" layoutY="185.0" mnemonicParsing="false" selected="true" text="Acceleration">
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-      <CheckBox fx:id="PositionBox" layoutX="8.0" layoutY="220.0" mnemonicParsing="false" text="Position">
+      <CheckBox fx:id="PositionBox" layoutX="8.0" layoutY="220.0" mnemonicParsing="false" selected="true" text="Position">
          <font>
             <Font size="18.0" />
          </font></CheckBox>
