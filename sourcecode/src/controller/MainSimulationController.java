@@ -126,7 +126,7 @@ public class MainSimulationController implements Initializable {
             statisticPane.setScaleY(1.0);
 
             AnchorPane.setTopAnchor(statisticPane, 20.0);
-            AnchorPane.setLeftAnchor(statisticPane, 10.0);
+            AnchorPane.setLeftAnchor(statisticPane, 20.0);
 
             mainPane.getChildren().add(statisticPane);
             this.statsController = loader.getController();
@@ -287,8 +287,8 @@ public class MainSimulationController implements Initializable {
             statisticPane.setScaleX(0.9);
             statisticPane.setScaleY(0.9);
 
-            AnchorPane.setTopAnchor(statisticPane, 25.0);
-            AnchorPane.setRightAnchor(statisticPane, 35.0);
+            AnchorPane.setTopAnchor(statisticPane, 20.0);
+            AnchorPane.setRightAnchor(statisticPane, 20.0);
 
             mainPane.getChildren().add(statisticPane);
             this.checkBoxController = loader.getController();
@@ -343,7 +343,10 @@ public class MainSimulationController implements Initializable {
         checkBoxController.reset();
         cube.setVisible(true);
         cylinder.setVisible(true);
-        if (timeline!=null) {timeline.pause();}
+        if (timeline != null) {
+            timeline.pause();
+            timeline.getKeyFrames().clear();
+        }
         surfaceTransition.pause();
         cloudTransition1.pause();
         cloudTransition2.pause();
@@ -355,9 +358,10 @@ public class MainSimulationController implements Initializable {
         if (dragDropController.is_cylinder) {
             rotate.pause();
         }
-        timeline.getKeyFrames().clear();
+        
         cube.setDisable(false);
         cylinder.setDisable(false);
+        disableForceController(true);
 
     }
     
