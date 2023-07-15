@@ -224,12 +224,12 @@ public class MainSimulationController implements Initializable {
         negativeAppliedForceArrow.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 15);
         negativeNetForceArrow.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2);
 
-        negativeNetForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2);
-        negativeAppliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 15);
-        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 15);
-        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 15);
-        netForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2);
-        appliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 15);
+        negativeNetForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
+        negativeAppliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
+        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
+        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
+        netForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
+        appliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
 
 
 
