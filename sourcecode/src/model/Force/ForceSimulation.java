@@ -1,5 +1,5 @@
-package model.force;
-import model.surface.Surface;
+package model.Force;
+import model.Surface.Surface;
 import model.object.MainObject;
 
 public class ForceSimulation {
@@ -110,6 +110,8 @@ public class ForceSimulation {
 	// Set the magnitude of the applied force
 	public void setAppliedForce(double appliedForce) {
 		this.appliedForce.setMagnitude(appliedForce);
+		frictionForce = new FrictionForce(0, surface, mainObject, this.appliedForce);
+		setNetForce();
 	}
 
 	// Get the friction force between the object and the surface
