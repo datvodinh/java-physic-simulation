@@ -202,9 +202,28 @@ public class MainSimulationController implements Initializable {
             else{
                 mass.setVisible(false);
             }
-            statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCube.getVelocity(),3)));
-            statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCube.getAcceleration(),3)));
-            statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCube.getPosition(),3)));
+            if (checkBoxController.getVelocityBox().isSelected()){
+                statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCube.getVelocity(),3)));
+                statsController.getVelocityText().setVisible(true);
+            }
+            else{
+                statsController.getVelocityText().setVisible(false);
+            }
+            if (checkBoxController.getAccelerationBox().isSelected()){
+                statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCube.getAcceleration(),3)));
+                statsController.getAccelerationText().setVisible(true);   
+            }
+            else{
+                statsController.getAccelerationText().setVisible(false);
+            }
+            if(checkBoxController.getPositionBox().isSelected()){
+                statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCube.getPosition(),3)));
+                statsController.getPositionText().setVisible(true);
+            }
+            else{
+                statsController.getPositionText().setVisible(false);
+            }
+
         
         }
         else{ //cylinder
@@ -217,14 +236,36 @@ public class MainSimulationController implements Initializable {
             else{
                 mass.setVisible(false);
             }
-            statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCylinder.getVelocity(),3)));
-            statsController.getAngularVelText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularVel(),3)));
-
-            statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCylinder.getAcceleration(),3)));
-            statsController.getAngularAccText().setText(Double.toString(round(dragDropController.MainCylinder.getGamma(),3)));
-
-            statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCylinder.getPosition(),3)));
-            statsController.getAngularPosText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularPos(),3)));
+            if (checkBoxController.getVelocityBox().isSelected()){
+                statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCylinder.getVelocity(),3)));
+                statsController.getAngularVelText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularVel(),3)));
+                statsController.getVelocityText().setVisible(true);
+                statsController.getAngularVelText().setVisible(true);
+            }
+            else{
+                statsController.getVelocityText().setVisible(false);
+                statsController.getAngularVelText().setVisible(false);
+            }
+            if (checkBoxController.getAccelerationBox().isSelected()){
+                statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCylinder.getAcceleration(),3)));
+                statsController.getAngularAccText().setText(Double.toString(round(dragDropController.MainCylinder.getGamma(),3)));
+                statsController.getAccelerationText().setVisible(true);
+                statsController.getAngularAccText().setVisible(true);
+            }
+            else{
+                statsController.getAccelerationText().setVisible(false);
+                statsController.getAngularAccText().setVisible(false);
+            }
+            if (checkBoxController.getPositionBox().isSelected()){
+                statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCylinder.getPosition(),3)));
+                statsController.getAngularPosText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularPos(),3)));
+                statsController.getPositionText().setVisible(true);
+                statsController.getAngularPosText().setVisible(true);
+            }
+            else{
+                statsController.getPositionText().setVisible(false);
+                statsController.getAngularPosText().setVisible(false);
+            }
         }
     }
 
