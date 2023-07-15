@@ -4,7 +4,7 @@ import model.force.Force;
 
 public class Cylinder extends MainObject {
     public static final double MAX_RADIUS = 1.0; // Maximum radius of the cylinder
-    public static final double MIN_RADIUS = 0.2; // Minimum radius of the cylinder
+    public static final double MIN_RADIUS = 0.5; // Minimum radius of the cylinder
     private double radius = MIN_RADIUS; // Radius of the cylinder
     private double angularPos = 0; // Angular position of the cylinder
     private double angularVel = 0; // Angular velocity of the cylinder

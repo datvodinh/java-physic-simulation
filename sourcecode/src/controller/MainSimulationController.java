@@ -599,6 +599,20 @@ public class MainSimulationController implements Initializable {
         disableForceController(true);
         statisticController.reset();
 
+        negativeNetForceLabel.setVisible(false);
+        negativeAppliedForceLabel.setVisible(false);
+        negativeFrictionForceLabel.setVisible(false);
+        frictionForceLabel.setVisible(false);
+        netForceLabel.setVisible(false);
+        appliedForceLabel.setVisible(false);
+
+        frictionForceArrow.setVisible(false);
+        appliedForceArrow.setVisible(false);
+        netForceArrow.setVisible(false);
+        negativeFrictionForceArrow.setVisible(false);
+        negativeAppliedForceArrow.setVisible(false);
+        negativeNetForceArrow.setVisible(false);
+
     }
     
     public void play() {

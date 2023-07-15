@@ -2,7 +2,7 @@ package model.object;
 
 public class Cube extends MainObject {
     public static final double MAX_SIZE = 1.0; // Maximum size of the cube
-    public static final double MIN_SIZE = 0.2; // Minimum size of the cube
+    public static final double MIN_SIZE = 0.5; // Minimum size of the cube
 
     private double size = MASS_DEFAULT; // Size of the cube
 
