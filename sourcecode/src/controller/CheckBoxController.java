@@ -8,44 +8,53 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 public class CheckBoxController implements Initializable {
-    @FXML
-    private CheckBox ForceBox,SumForceBox,MassBox,VelocityBox,AccelerationBox,PositionBox,ValueBox;
-    @FXML
 
+    @FXML
+    private CheckBox ForceBox, SumForceBox, MassBox, VelocityBox, AccelerationBox, PositionBox, ValueBox;
+
+    // Getter methods for the checkboxes
     public CheckBox getForceBox() {
         return ForceBox;
     }
+
     public CheckBox getSumForceBox() {
         return SumForceBox;
     }
+
     public CheckBox getMassBox() {
         return MassBox;
     }
+
     public CheckBox getVelocityBox() {
         return VelocityBox;
     }
+
     public CheckBox getAccelerationBox() {
         return AccelerationBox;
     }
+
     public CheckBox getPositionBox() {
         return PositionBox;
     }
+
     public CheckBox getValueBox() {
         return ValueBox;
     }
-    public void reset(){
-        
+
+    // Reset all checkboxes to unselected state
+    public void reset() {
         ForceBox.setSelected(false);
         SumForceBox.setSelected(false);
         ValueBox.setSelected(false);
         MassBox.setSelected(false);
-        VelocityBox.setSelected(false);
-        AccelerationBox.setSelected(false);
-        PositionBox.setSelected(false);
+        VelocityBox.setSelected(true);
+        AccelerationBox.setSelected(true);
+        PositionBox.setSelected(true);
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        // Initialization code for the controller (if any)
     }
-    
+
 }

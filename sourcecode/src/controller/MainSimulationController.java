@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -23,13 +24,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
-import model.Force.AppliedForce;
-import model.Force.ForceSimulation;
-import model.Force.FrictionForce;
+import model.force.AppliedForce;
+import model.force.ForceSimulation;
+import model.force.FrictionForce;
 import model.object.Cube;
 import model.object.Cylinder;
-import model.Surface.Surface;
+import model.surface.Surface;
 import javafx.scene.control.Label;
 
 public class MainSimulationController implements Initializable {
@@ -91,8 +93,10 @@ public class MainSimulationController implements Initializable {
     private Label appliedForceLabel;
     Pane statisticPane;
     Pane forcePane;
+
     Cube mainCube;
     Cylinder mainCylinder;
+
     ForceSimulation forceSimulation;
     Surface mainSurface = new Surface();
     AppliedForce appliedForce = new AppliedForce(0);
@@ -103,7 +107,9 @@ public class MainSimulationController implements Initializable {
     TranslateTransition surfaceTransition = new TranslateTransition();
     TranslateTransition backgroundTransition = new TranslateTransition();
     RotateTransition rotate = new RotateTransition();
+
     private double scaleFactor=0.5;
+    Label mass = new Label();
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -114,6 +120,7 @@ public class MainSimulationController implements Initializable {
         appliedForceArrow.setVisible(false);
         negativeFrictionForceArrow.setVisible(false);
         negativeAppliedForceArrow.setVisible(false);
+        mainPane.getChildren().add(mass);
 
         dragDropController.initializeObject(cube, cylinder, mainObject, surface, () -> {
             try {
@@ -139,6 +146,29 @@ public class MainSimulationController implements Initializable {
 
     }
     
+
+    private void loadStats() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/Stats.fxml"));
+
+            statisticPane = (Pane) loader.load();
+            statisticPane.setScaleX(1.0);
+            statisticPane.setScaleY(1.0);
+
+            AnchorPane.setTopAnchor(statisticPane, 20.0);
+            AnchorPane.setLeftAnchor(statisticPane, 20.0);
+
+            mainPane.getChildren().add(statisticPane);
+            this.statsController = loader.getController();
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+  
     public void onObjectInitialized() throws Exception {
         if (timeline != null) {
             timeline.pause();
@@ -150,6 +180,7 @@ public class MainSimulationController implements Initializable {
             mainObject.setRotate(0);
         }
         if (dragDropController.is_cube) {
+
             mainCube = dragDropController.MainCube;
             forceSimulation = new ForceSimulation(mainCube, mainSurface, appliedForce);
             frictionForceArrow.setVisible(false);
@@ -567,9 +598,18 @@ public class MainSimulationController implements Initializable {
                     e.printStackTrace();
                 }
             });
-        }
-        
+            forceSimulation = new ForceSimulation(dragDropController.MainCube, mainSurface, appliedForce);
+            frame = new KeyFrame(Duration.seconds(0.05), event -> {
+                mainKeyFrame(dragDropController.MainCube, false);});
+            }
 
+            else { //Cylinder
+                forceSimulation = new ForceSimulation(dragDropController.MainCylinder, mainSurface, appliedForce);
+
+                frame = new KeyFrame(Duration.seconds(0.05), event -> {
+                    mainKeyFrame(dragDropController.MainCylinder, true);});
+
+        }
 
         timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -578,7 +618,108 @@ public class MainSimulationController implements Initializable {
         // cube.setDisable(true);
         // cylinder.setDisable(true);
     }
+
+    private void mainKeyFrame(MainObject object, boolean is_rotate) {
+        animation.setMovement(surfaceTransition, surface, object.getVelocity(), mainPane.getWidth());
+        animation.setMovement(cloudTransition1, cloud1, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition2, cloud2, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition3, cloud3, object.getVelocity() / 50, mainPane.getWidth());
+        animation.setMovement(cloudTransition4, cloud4, object.getVelocity() / 50, mainPane.getWidth());
+        if (is_rotate) {animation.setRotate(rotate, mainObject, ((Cylinder) object).getAngularVel());}
+        
+        try {
+            forceSimulation.getSur().setKineticCoef(surfaceController.getKSlider().getValue());
+            forceSimulation.getSur().setStaticCoef(surfaceController.getSSlider().getValue());
+            forceSimulation.setAppliedForce(forceSlider.getValue());
+            forceSimulation.setFrictionForce();
+            forceSimulation.setNetForce();
+            forceSimulation.applyForceInTime(0.05);
+            showStats();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
+    private void showStats() {
+        mass.setFont(new Font(25));
+        if (dragDropController.is_cube){ //cube
+            if (checkBoxController.getMassBox().isSelected()){
+                mass.setText(Double.toString(dragDropController.MainCube.getMass()));
+                mass.setVisible(true);
+                mass.setLayoutX(mainObject.getLayoutX() + mainObject.getFitWidth()/2);
+                mass.setLayoutY(mainObject.getLayoutY() - mainObject.getFitHeight());
+            }
+            else{
+                mass.setVisible(false);
+            }
+            if (checkBoxController.getVelocityBox().isSelected()){
+                statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCube.getVelocity(),3)));
+                statsController.getVelocityText().setVisible(true);
+            }
+            else{
+                statsController.getVelocityText().setVisible(false);
+            }
+            if (checkBoxController.getAccelerationBox().isSelected()){
+                statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCube.getAcceleration(),3)));
+                statsController.getAccelerationText().setVisible(true);   
+            }
+            else{
+                statsController.getAccelerationText().setVisible(false);
+            }
+            if(checkBoxController.getPositionBox().isSelected()){
+                statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCube.getPosition(),3)));
+                statsController.getPositionText().setVisible(true);
+            }
+            else{
+                statsController.getPositionText().setVisible(false);
+            }
+
+        
+        }
+        else{ //cylinder
+            if (checkBoxController.getMassBox().isSelected()){
+            mass.setText(Double.toString(round(dragDropController.MainCylinder.getMass(),3))+" kg");
+            mass.setVisible(true);
+            mass.setLayoutX(mainObject.getLayoutX() + mainObject.getFitWidth()/2);
+            mass.setLayoutY(mainObject.getLayoutY() -  mainObject.getFitHeight());
+            }
+            else{
+                mass.setVisible(false);
+            }
+            if (checkBoxController.getVelocityBox().isSelected()){
+                statsController.getVelocityText().setText(Double.toString(round(dragDropController.MainCylinder.getVelocity(),3)));
+                statsController.getAngularVelText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularVel(),3)));
+                statsController.getVelocityText().setVisible(true);
+                statsController.getAngularVelText().setVisible(true);
+            }
+            else{
+                statsController.getVelocityText().setVisible(false);
+                statsController.getAngularVelText().setVisible(false);
+            }
+            if (checkBoxController.getAccelerationBox().isSelected()){
+                statsController.getAccelerationText().setText(Double.toString(round(dragDropController.MainCylinder.getAcceleration(),3)));
+                statsController.getAngularAccText().setText(Double.toString(round(dragDropController.MainCylinder.getGamma(),3)));
+                statsController.getAccelerationText().setVisible(true);
+                statsController.getAngularAccText().setVisible(true);
+            }
+            else{
+                statsController.getAccelerationText().setVisible(false);
+                statsController.getAngularAccText().setVisible(false);
+            }
+            if (checkBoxController.getPositionBox().isSelected()){
+                statsController.getPositionText().setText(Double.toString(round(dragDropController.MainCylinder.getPosition(),3)));
+                statsController.getAngularPosText().setText(Double.toString(round(dragDropController.MainCylinder.getAngularPos(),3)));
+                statsController.getPositionText().setVisible(true);
+                statsController.getAngularPosText().setVisible(true);
+            }
+            else{
+                statsController.getPositionText().setVisible(false);
+                statsController.getAngularPosText().setVisible(false);
+            }
+        }
+    }
+
     public void disableForceController(boolean b) {
         forceSlider.setDisable(b);
         increaseForce.setDisable(b);
@@ -597,8 +738,8 @@ public class MainSimulationController implements Initializable {
             statisticPane.setScaleX(0.9);
             statisticPane.setScaleY(0.9);
 
-            AnchorPane.setTopAnchor(statisticPane, 25.0);
-            AnchorPane.setRightAnchor(statisticPane, 35.0);
+            AnchorPane.setTopAnchor(statisticPane, 20.0);
+            AnchorPane.setRightAnchor(statisticPane, 20.0);
 
             mainPane.getChildren().add(statisticPane);
             this.statisticController = loader.getController();
@@ -653,14 +794,17 @@ public class MainSimulationController implements Initializable {
         statisticController.reset();
         cube.setVisible(true);
         cylinder.setVisible(true);
-        if (timeline!=null) {timeline.pause();}
+        if (timeline != null) {
+            timeline.pause();
+            timeline.getKeyFrames().clear();
+        }
         surfaceTransition.pause();
         backgroundTransition.pause();
         rotate.pause();
         if (dragDropController.is_cylinder) {
             rotate.pause();
         }
-        timeline.getKeyFrames().clear();
+        
         cube.setDisable(false);
         cylinder.setDisable(false);
         frictionForceArrow.setVisible(false);
@@ -675,6 +819,8 @@ public class MainSimulationController implements Initializable {
         negativeFrictionForceLabel.setVisible(false);
         negativeNetForceLabel.setVisible(false);
         negativeAppliedForceLabel.setVisible(false);
+        disableForceController(true);
+
     }
     
     public void play() {

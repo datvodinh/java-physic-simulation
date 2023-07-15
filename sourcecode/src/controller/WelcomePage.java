@@ -33,6 +33,13 @@ public class WelcomePage implements Initializable {
     private ImageView cylinder;
 
     AnimationController animationController = new AnimationController();
+
+    /**
+     * Switches to the main simulation scene when the start button is clicked.
+     *
+     * @param event The ActionEvent triggered by the start button click.
+     * @throws IOException If an I/O exception occurs while loading the new scene.
+     */
     public void start(ActionEvent event) throws IOException {
         // Load the new scene from FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainSimulation.fxml"));
@@ -44,9 +51,39 @@ public class WelcomePage implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
+    public void about(ActionEvent event) throws IOException {
+        // Load the new scene from FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/About.fxml"));
+        Parent root = loader.load();
+
+        // Set the new scene on the primary stage
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void back(ActionEvent event) throws IOException {
+        // Load the new scene from FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
+        Parent root = loader.load();
+
+        // Set the new scene on the primary stage
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Performs a translation animation on the given transition with the specified rate.
+     *
+     * @param transition The TranslateTransition object to animate.
+     * @param rate       The rate at which the animation should play.
+     */
     public void animation(TranslateTransition transition, double rate) {
-        transition.setDuration((Duration.seconds(20)));
+        transition.setDuration(Duration.seconds(20));
         transition.setByX(0);
         transition.setFromX(1280);
         transition.setToX(0);
@@ -57,6 +94,12 @@ public class WelcomePage implements Initializable {
         transition.play();
     }
 
+    /**
+     * Performs a rotation animation on the given RotateTransition with the specified rate.
+     *
+     * @param rotate The RotateTransition object to animate.
+     * @param rate   The rate at which the animation should play.
+     */
     public void rotation(RotateTransition rotate, double rate) {
         rotate.setCycleCount(TranslateTransition.INDEFINITE);
         rotate.setByAngle(360.0);
@@ -76,7 +119,7 @@ public class WelcomePage implements Initializable {
         }
         TranslateTransition surfaceTransition = new TranslateTransition(Duration.seconds(5), surface);
         animation(surfaceTransition, 2);
-        RotateTransition rotate = new RotateTransition(Duration.seconds(5),cylinder);
+        RotateTransition rotate = new RotateTransition(Duration.seconds(5), cylinder);
         rotation(rotate, 2);
     }
 }

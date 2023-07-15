@@ -1,4 +1,4 @@
-#welcomeButton {
+.button {
     -fx-background-color: #4CAF50; /* Green */
     -fx-text-fill: white;
     -fx-font-size: 50px;
@@ -7,7 +7,7 @@
     -fx-transition: all 0.3s;
 }
 
-#welcomeButton:hover {
+.button:hover {
     -fx-background-color: #45a049; /* Darker green */
     -fx-cursor: hand;
     -fx-scale-x: 1.2;
@@ -15,42 +15,13 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 20, 0.0 , 0 , 4 );
 }
 
-@keyframes slideAnimation {
-    0% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(20px);
-    }
-    100% {
-        transform: translateX(0);
-    }
+.slider .thumb {
+    -fx-pref-height: 20px;
+    -fx-pref-width: 10px;
 }
 
-.my-image {
-    animation-name: slideAnimation;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+.slider .axis { 
+    -fx-tick-label-fill: black;  
 }
 
-#backgroundImage {
-    animation-name: slideAnimation;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
 
-#my-image {
-    animation-name: slideAnimation;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-#backgroundImage:hover {
-    animation-name: slideAnimation;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
