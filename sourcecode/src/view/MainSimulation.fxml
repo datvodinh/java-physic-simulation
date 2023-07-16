@@ -4,13 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -126,31 +126,49 @@
          <image>
             <Image url="@../img/negativeSumForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
 	  <ImageView fx:id="netForceArrow" fitHeight="30" fitWidth="78.0" layoutX="640.0" layoutY="143.0" visible="false">
          <image>
             <Image url="@../img/sumForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
 	  <ImageView fx:id="negativeAppliedForceArrow" fitHeight="30" fitWidth="30" layoutX="610.0" layoutY="330.0" visible="false">
          <image>
             <Image url="@../img/negativeApplyForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
 	  <ImageView fx:id="appliedForceArrow" fitHeight="30" fitWidth="30" layoutX="640.0" layoutY="330.0" visible="false">
          <image>
             <Image url="@../img/applyForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="negativeFrictionForceArrow" fitHeight="30" fitWidth="30.0" layoutX="610.0" layoutY="330.0" visible="false">
       	<image>
             <Image url="@../img/negativeFrictionForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
    	  </ImageView>
       <ImageView fx:id="frictionForceArrow" fitHeight="30" fitWidth="30" layoutX="640.0" layoutY="330.0" visible="false">
       	<image>
             <Image url="@../img/frictionForceArrow.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
    	  </ImageView>
       <Label fx:id="negativeNetForceLabel" layoutX="584.0" layoutY="143.0" text="Label" textFill="WHITE" visible="false">
          <font>
@@ -182,8 +200,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <StackPane prefHeight="150.0" prefWidth="200.0" />
 
    </children>
 </AnchorPane>

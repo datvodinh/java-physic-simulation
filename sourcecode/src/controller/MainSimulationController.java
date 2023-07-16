@@ -26,13 +26,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import model.Force.AppliedForce;
-import model.Force.ForceSimulation;
-import model.Force.FrictionForce;
+import model.force.AppliedForce;
+import model.force.ForceSimulation;
+import model.force.FrictionForce;
 import model.object.Cube;
 import model.object.Cylinder;
 import model.object.MainObject;
-import model.Surface.Surface;
+import model.surface.Surface;
 
 public class MainSimulationController implements Initializable {
     
@@ -226,8 +226,8 @@ public class MainSimulationController implements Initializable {
 
         negativeNetForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
         negativeAppliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
-        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 24);
-        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 24);
+        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
+        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
         netForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
         appliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
 
@@ -299,7 +299,8 @@ public class MainSimulationController implements Initializable {
                     }
                     else {
                     negativeFrictionForceArrow.setVisible(false);
-                    frictionForceArrow.setVisible(true);	                                		
+                    frictionForceArrow.setVisible(true);
+                    frictionForceArrow.setFitWidth(frictionForceArrowWidth);	                                		
                     frictionForceArrow.setFitHeight(30);	                		
                     }
                 }
