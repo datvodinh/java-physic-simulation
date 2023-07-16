@@ -84,6 +84,13 @@ public class Cylinder extends MainObject {
         else {
             setAngularVel(newAngvel);
         }
+
+        if (getAngularVel() > MAX_VEL / radius) {
+            setAngularVel(MAX_VEL / radius);
+        }
+        else if (getAngularVel() < MIN_VEL / radius) {
+            setAngularVel(MIN_VEL / radius);
+        }
     }
     
     // Update the angular position of the cylinder based on the given time interval
