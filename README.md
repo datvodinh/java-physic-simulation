@@ -1,6 +1,37 @@
-# OOP.DSAI.20222.05
+# `OOP.DSAI.20222.05`
 
-## Repository Structure
+## `Table of Contents`
+- [`OOP.DSAI.20222.05`](#oopdsai2022205)
+  - [`Table of Contents`](#table-of-contents)
+  - [`Background`](#background)
+  - [`Installation`](#installation)
+    - [`Requirement`](#requirement)
+    - [`Run`](#run)
+  - [`Structure`](#structure)
+  - [`Member`](#member)
+- [`Contributing`](#contributing)
+  - [`1. Vo Dinh Dat`](#1-vo-dinh-dat)
+  - [`2. Tran Quoc De`](#2-tran-quoc-de)
+  - [`3. Nguyen Minh Cuong`](#3-nguyen-minh-cuong)
+  - [`4. Hoang Thanh Dat`](#4-hoang-thanh-dat)
+
+
+## `Background`
+
+This project is an interactive simulation designed to demonstrate Newton's laws of motion. It allows users to control a physical system consisting of a main object, a surface, and an actor, and observe the resulting motion of the main object. The simulation provides a graphical user interface (GUI) similar to the reference provided, allowing users to manipulate various parameters and visualize the forces at play.
+
+## `Installation`
+
+###  `Requirement`
+```
+JavaFX 20.0.1
+JDK-17.0.6.10
+```
+
+### `Run`
+
+- Run `MainSimulation.java`
+## `Structure`
 
 <details>
   <summary>Click to show Details</summary>
@@ -88,7 +119,7 @@
 </details>
 
 
-## Member
+## `Member`
 
 
 | Member            | Github        | 
@@ -98,8 +129,8 @@
 | Nguyen Minh Cuong | @sohm2        |
 | Hoang Thanh Dat   | @datht4889    |    
 
-# Task
-## 1. Vo Dinh Dat
+# `Contributing`
+## `1. Vo Dinh Dat`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]()  | `25%` |
@@ -113,7 +144,7 @@
 | [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `100%` |
 | [`view/Welcome.fxml`](sourcecode/src/view/Welcome.fxml)  | `100%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml) | `50%` |
-## 2. Tran Quoc De
+## `2. Tran Quoc De`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
@@ -126,7 +157,7 @@
 | [`controller/SurfaceController`](sourcecode/src/controller/SurfaceController.java) | `100%` |
 | [`view/StatsPanel`](sourcecode/src/view/StatsPanel.fxml) | `100%` |
 | [`view/Checkbox`](sourcecode/src/view/Checkbox.fxml) | `100%` |
-## 3. Nguyen Minh Cuong
+## `3. Nguyen Minh Cuong`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
@@ -137,7 +168,7 @@
 | [`model/force/Vector`](sourcecode/src/model/force/AppliedForce.java) | `100%` |
 | [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `25%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml)| `50%` |
-## 4. Hoang Thanh Dat
+## `4. Hoang Thanh Dat`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
