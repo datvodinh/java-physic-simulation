@@ -619,6 +619,7 @@ public class MainSimulationController implements Initializable {
         negativeFrictionForceArrow.setVisible(false);
         negativeAppliedForceArrow.setVisible(false);
         negativeNetForceArrow.setVisible(false);
+        mass.setVisible(false);
 
     }
     

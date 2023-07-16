@@ -170,32 +170,32 @@
             <InnerShadow />
          </effect>
    	  </ImageView>
-      <Label fx:id="negativeNetForceLabel" layoutX="584.0" layoutY="143.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="negativeNetForceLabel" layoutX="584.0" layoutY="143.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="netForceLabel" layoutX="640.0" layoutY="143.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="netForceLabel" layoutX="645.0" layoutY="143.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="negativeAppliedForceLabel" layoutX="584.0" layoutY="330.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="negativeAppliedForceLabel" layoutX="584.0" layoutY="330.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="appliedForceLabel" layoutX="640.0" layoutY="330.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="appliedForceLabel" layoutX="645.0" layoutY="330.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="frictionForceLabel" layoutX="640.0" layoutY="305.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="frictionForceLabel" layoutX="645.0" layoutY="305.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="negativeFrictionForceLabel" layoutX="584.0" layoutY="305.0" text="Label" textFill="WHITE" visible="false">
+      <Label fx:id="negativeFrictionForceLabel" layoutX="584.0" layoutY="305.0" text="Label" visible="false">
          <font>
             <Font size="16.0" />
          </font>
