@@ -1,7 +1,7 @@
-# OOP.DSAI.20222.05
+# `OOP.DSAI.20222.05``
 
 ## `Table of Contents`
-- [OOP.DSAI.20222.05](#oopdsai2022205)
+- [\`OOP.DSAI.20222.05\`\`](#oopdsai2022205)
   - [`Table of Contents`](#table-of-contents)
   - [`Background`](#background)
   - [`Installation`](#installation)
@@ -10,10 +10,10 @@
   - [`Structure`](#structure)
   - [`Member`](#member)
 - [`Contributing`](#contributing)
-  - [1. Vo Dinh Dat](#1-vo-dinh-dat)
-  - [2. Tran Quoc De](#2-tran-quoc-de)
-  - [3. Nguyen Minh Cuong](#3-nguyen-minh-cuong)
-  - [4. Hoang Thanh Dat](#4-hoang-thanh-dat)
+  - [`1. Vo Dinh Dat`](#1-vo-dinh-dat)
+  - [`2. Tran Quoc De`](#2-tran-quoc-de)
+  - [`3. Nguyen Minh Cuong`](#3-nguyen-minh-cuong)
+  - [`4. Hoang Thanh Dat`](#4-hoang-thanh-dat)
 
 
 ## `Background`
@@ -129,7 +129,7 @@ JDK-17.0.6.10
 | Hoang Thanh Dat   | @datht4889    |    
 
 # `Contributing`
-## 1. Vo Dinh Dat
+## `1. Vo Dinh Dat`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]()  | `25%` |
@@ -143,7 +143,7 @@ JDK-17.0.6.10
 | [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `100%` |
 | [`view/Welcome.fxml`](sourcecode/src/view/Welcome.fxml)  | `100%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml) | `50%` |
-## 2. Tran Quoc De
+## `2. Tran Quoc De`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
@@ -156,7 +156,7 @@ JDK-17.0.6.10
 | [`controller/SurfaceController`](sourcecode/src/controller/SurfaceController.java) | `100%` |
 | [`view/StatsPanel`](sourcecode/src/view/StatsPanel.fxml) | `100%` |
 | [`view/Checkbox`](sourcecode/src/view/Checkbox.fxml) | `100%` |
-## 3. Nguyen Minh Cuong
+## `3. Nguyen Minh Cuong`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
@@ -167,7 +167,7 @@ JDK-17.0.6.10
 | [`model/force/Vector`](sourcecode/src/model/force/AppliedForce.java) | `100%` |
 | [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `25%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml)| `50%` |
-## 4. Hoang Thanh Dat
+## `4. Hoang Thanh Dat`
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
