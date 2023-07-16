@@ -20,6 +20,8 @@
 
 This project is an interactive simulation designed to demonstrate Newton's laws of motion. It allows users to control a physical system consisting of a main object, a surface, and an actor, and observe the resulting motion of the main object. The simulation provides a graphical user interface (GUI) similar to the reference provided, allowing users to manipulate various parameters and visualize the forces at play.
 
+![](sourcecode/src/img/demo_gif.gif)
+
 ## `Installation`
 
 ###  `Requirement`
