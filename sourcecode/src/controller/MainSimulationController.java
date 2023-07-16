@@ -22,17 +22,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import model.force.AppliedForce;
-import model.force.ForceSimulation;
-import model.force.FrictionForce;
+import model.Force.AppliedForce;
+import model.Force.ForceSimulation;
+import model.Force.FrictionForce;
 import model.object.Cube;
 import model.object.Cylinder;
 import model.object.MainObject;
-import model.surface.Surface;
+import model.Surface.Surface;
 
 public class MainSimulationController implements Initializable {
     
@@ -226,8 +226,8 @@ public class MainSimulationController implements Initializable {
 
         negativeNetForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
         negativeAppliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
-        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
-        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
+        negativeFrictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 24);
+        frictionForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 24);
         netForceLabel.setLayoutY(mainObject.getLayoutY() - mainObject.getFitWidth() / 2 + 3);
         appliedForceLabel.setLayoutY(mainObject.getLayoutY() + mainObject.getFitWidth() / 2 - 12);
 
@@ -242,7 +242,7 @@ public class MainSimulationController implements Initializable {
             
             double frictionForceArrowWidth = Math.abs(frictionForceValue) * scaleFactor;
             double appliedForceArrowWidth = Math.abs(appliedForceValue) * scaleFactor;
-            if (checkBoxController.getForceBox().isSelected() && object.getVelocity()!=0) {	                	
+            if (checkBoxController.getForceBox().isSelected() && (object.getVelocity()!=0||(netForceValue==0&&appliedForceValue!=0))) {	                	
                     {
                 if (appliedForceValue>0) {
                     appliedForceArrow.setVisible(true);
@@ -310,7 +310,7 @@ public class MainSimulationController implements Initializable {
             negativeFrictionForceArrow.setVisible(false);
             negativeAppliedForceArrow.setVisible(false);	                
             }
-            if (checkBoxController.getSumForceBox().isSelected() && object.getVelocity()!=0) {	                	
+            if (checkBoxController.getSumForceBox().isSelected() && object.getVelocity()!=0&& netForceValue!=0) {	                	
                 if (netForceValue>0) {
                     netForceArrow.setVisible(true);
                     negativeNetForceArrow.setVisible(false);	                	 
@@ -330,9 +330,9 @@ public class MainSimulationController implements Initializable {
             netForceArrow.setVisible(false);
             negativeNetForceArrow.setVisible(false);	                
             }         
-            if (checkBoxController.getValueBox().isSelected() && object.getVelocity()!=0) {		         	
+            if (checkBoxController.getValueBox().isSelected() && (object.getVelocity()!=0||(netForceValue==0&&appliedForceValue!=0))) {		         	
                 {
-                    if (checkBoxController.getSumForceBox().isSelected()) {
+                    if (checkBoxController.getSumForceBox().isSelected()  && object.getVelocity()!=0&&netForceValue!=0) {
                     if (netForceValue>0) {		 		        	 
                         netForceLabel.setVisible(true);
                         negativeNetForceLabel.setVisible(false);		 		        	 		 		     
@@ -343,7 +343,13 @@ public class MainSimulationController implements Initializable {
                         netForceLabel.setVisible(false);
                         negativeNetForceLabel.setText(String.format("%.0f", netForceValue)+" N");
                     }
-                } 	 
+                } 
+                    else {
+                    	netForceLabel.setVisible(false);
+                        negativeNetForceLabel.setVisible(false);
+                        negativeNetForceLabel.setVisible(false);
+                        netForceLabel.setVisible(false);
+                    }
             if (appliedForceValue>0) {
                 appliedForceLabel.setVisible(true);
                 negativeAppliedForceLabel.setVisible(false);		        	 

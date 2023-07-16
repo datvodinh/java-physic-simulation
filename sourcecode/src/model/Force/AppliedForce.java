@@ -1,7 +1,7 @@
 package model.force;
 
 public class AppliedForce extends Force {
-	public static final double ABSOLUTE_MAX_APPLIEDFORCE = 6996; // Absolute maximum applied force value
+	public static final double ABSOLUTE_MAX_APPLIEDFORCE = 500; // Absolute maximum applied force value
 
 	public AppliedForce(double magnitude) {
 		super(magnitude);

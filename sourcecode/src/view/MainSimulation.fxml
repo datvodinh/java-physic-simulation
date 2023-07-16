@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -120,16 +121,6 @@
       </GridPane>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="LAVENDER" height="260.0" layoutX="1060.0" layoutY="20.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="200.0" layoutX="20.0" layoutY="20.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="400.0" />
-      <ImageView fx:id="frictionForceArrow" fitHeight="30" fitWidth="30" layoutX="640.0" layoutY="330.0" visible="false">
-      	<image>
-            <Image url="@../img/frictionForceArrow.png" />
-         </image>
-   	  </ImageView>
-      <ImageView fx:id="negativeFrictionForceArrow" fitHeight="30" fitWidth="30.0" layoutX="610.0" layoutY="330.0" visible="false">
-      	<image>
-            <Image url="@../img/negativeFrictionForceArrow.png" />
-         </image>
-   	  </ImageView>
       
       <ImageView fx:id="negativeNetForceArrow" fitHeight="30.0" fitWidth="70.0" layoutX="595.0" layoutY="143.0" visible="false">
          <image>
@@ -151,36 +142,48 @@
             <Image url="@../img/applyForceArrow.png" />
          </image>
       </ImageView>
-      <Label fx:id="negativeNetForceLabel" layoutX="584.0" layoutY="143.0" text="Label" visible="false">
+      <ImageView fx:id="negativeFrictionForceArrow" fitHeight="30" fitWidth="30.0" layoutX="610.0" layoutY="330.0" visible="false">
+      	<image>
+            <Image url="@../img/negativeFrictionForceArrow.png" />
+         </image>
+   	  </ImageView>
+      <ImageView fx:id="frictionForceArrow" fitHeight="30" fitWidth="30" layoutX="640.0" layoutY="330.0" visible="false">
+      	<image>
+            <Image url="@../img/frictionForceArrow.png" />
+         </image>
+   	  </ImageView>
+      <Label fx:id="negativeNetForceLabel" layoutX="584.0" layoutY="143.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="netForceLabel" layoutX="640.0" layoutY="143.0" text="Label" visible="false">
+      <Label fx:id="netForceLabel" layoutX="640.0" layoutY="143.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="negativeAppliedForceLabel" layoutX="584.0" layoutY="330.0" text="Label" visible="false">
+      <Label fx:id="negativeAppliedForceLabel" layoutX="584.0" layoutY="330.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="frictionForceLabel" layoutX="640.0" layoutY="300.0" text="Label" visible="false">
+      <Label fx:id="appliedForceLabel" layoutX="640.0" layoutY="330.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="appliedForceLabel" layoutX="640.0" layoutY="330.0" text="Label" visible="false">
+      <Label fx:id="frictionForceLabel" layoutX="640.0" layoutY="305.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="negativeFrictionForceLabel" layoutX="584.0" layoutY="300.0" text="Label" visible="false">
+      <Label fx:id="negativeFrictionForceLabel" layoutX="584.0" layoutY="305.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <StackPane prefHeight="150.0" prefWidth="200.0" />
 
    </children>
 </AnchorPane>
