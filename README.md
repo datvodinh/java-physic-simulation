@@ -45,15 +45,19 @@ JDK-17.0.6.10
 │   .gitignore
 │   LICENSE
 │   README.md
-│
+│   
 ├───.vscode
 │       launch.json
 │       settings.json
+│       
+├───demo
+│       Demo.mov
 │
-├───Design
+├───design
+│       .DS_Store
 │       Controller diagram 1.png
 │       Controller Diagram 2.png
-│       Controller Diagram.asta
+│       Controller.asta
 │       force_class_diagram.asta
 │       force_diagram.png
 │       general_class_diagram.asta
@@ -67,6 +71,12 @@ JDK-17.0.6.10
 │       usecase_diagram.asta
 │       usecase_diagram.png
 │
+├───presentation
+│       OOP_Presentation.pptx
+│
+├───report
+│       OOP_report.pdf
+│
 └───sourcecode
     │   .DS_Store
     │   README.md
@@ -77,20 +87,29 @@ JDK-17.0.6.10
         │
         ├───controller
         │       AnimationController.java
+        │       CheckBoxController.java
         │       DragDropController.java
-        │       ForceController.java
         │       MainSimulationController.java
-        │       StatisticController.java
+        │       StatsController.java
         │       SurfaceController.java
+        │       WelcomePage.java
+        │
+        ├───css
+        │       style.css
         │
         ├───img
         │       appIcon.png
         │       applyForceArrow.png
         │       background.jpg
-        │       background.png
+        │       cloud.png
         │       cube.png
         │       cylinder.png
+        │       demo_gif.gif
         │       frictionForceArrow.png
+        │       mountains.png
+        │       negativeApplyForceArrow.png
+        │       negativeFrictionForceArrow.png
+        │       negativeSumForceArrow.png
         │       sumForceArrow.png
         │       surface.png
         │
@@ -111,11 +130,13 @@ JDK-17.0.6.10
         │           Surface.java
         │
         └───view
+                About.fxml
+                CheckBox.fxml
                 ForcePanel.fxml
-                MainObject.fxml
                 MainSimulation.fxml
-                StatsPanel.fxml
+                Stats.fxml
                 SurfacePanel.fxml
+                Welcome.fxml
 ```
 
   </div>
