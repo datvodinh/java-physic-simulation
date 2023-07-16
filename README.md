@@ -1,6 +1,6 @@
 # OOP.DSAI.20222.05
 
-## Repository Structure
+## `Repository Structure`
 
 <details>
   <summary>Click to show details</summary>
@@ -88,7 +88,7 @@
 </details>
 
 
-## Member
+## `Member`
 
 | Member            | Github        | 
 | :--               |    :---       |
@@ -97,7 +97,7 @@
 | Nguyen Minh Cuong | @sohm2        |
 | Hoang Thanh Dat   | @datht4889    |    
 
-# Task
+# `Task`
 ## 1. Vo Dinh Dat
 |Work |Contribute |
 | :--               |    :---       |
