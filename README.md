@@ -1,7 +1,7 @@
-# `OOP.DSAI.20222.05``
+# `OOP.DSAI.20222.05`
 
 ## `Table of Contents`
-- [\`OOP.DSAI.20222.05\`\`](#oopdsai2022205)
+- [`OOP.DSAI.20222.05`](#oopdsai2022205)
   - [`Table of Contents`](#table-of-contents)
   - [`Background`](#background)
   - [`Installation`](#installation)
