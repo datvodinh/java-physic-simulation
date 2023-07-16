@@ -1,7 +1,4 @@
-# OOP.DSAI.20212.05
-
-A project on Simulation of Physic, class IT3100E, semester 20222,
-HUST
+# OOP.DSAI.20222.05
 
 ## Repository Structure
 
