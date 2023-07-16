@@ -23,6 +23,7 @@ This project is an interactive simulation designed to demonstrate Newton's laws 
 ## `Installation`
 
 ###  `Requirement`
+
 ```
 JavaFX 20.0.1
 JDK-17.0.6.10
@@ -122,12 +123,12 @@ JDK-17.0.6.10
 ## `Member`
 
 
-| Member            | Github        | 
-| :--               |    :---       |
-| Vo Dinh Dat       | @datvodinh10  |
-| Tran Quoc De      | @tranquocde   |
-| Nguyen Minh Cuong | @sohm2        |
-| Hoang Thanh Dat   | @datht4889    |    
+| Member            |MSSV         | Github        | 
+| :--               |:---         |    :---       |
+| Vo Dinh Dat       |20214890     | @datvodinh10  |
+| Tran Quoc De      |20210179     | @tranquocde   |
+| Nguyen Minh Cuong |20210140     | @sohm2        |
+| Hoang Thanh Dat   |20214889     | @datht4889    |    
 
 ## `Contributing`
 ### `1. Vo Dinh Dat`
@@ -141,7 +142,7 @@ JDK-17.0.6.10
 | [`controller/DragDropController`](sourcecode/src/controller/DragDropController.java)  | `50%` |
 | [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `50%` |
 | [`controller/WelcomePage.java`](sourcecode/src/controller/WelcomePage.java)  | `100%` |
-| [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `100%` |
+| [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `75%` |
 | [`view/Welcome.fxml`](sourcecode/src/view/Welcome.fxml)  | `100%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml) | `50%` |
 ### `2. Tran Quoc De`
@@ -168,6 +169,7 @@ JDK-17.0.6.10
 | [`model/force/Vector`](sourcecode/src/model/force/AppliedForce.java) | `100%` |
 | [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `25%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml)| `50%` |
+| [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `25%` |
 ### `4. Hoang Thanh Dat`
 |Work |Contribute |
 | :--               |    :---       |
