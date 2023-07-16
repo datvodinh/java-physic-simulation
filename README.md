@@ -2,6 +2,14 @@
 
 A project on Simulation of Physic, class IT3100E, semester 20222,
 HUST
+
+## Repository Structure
+
+<details>
+  <summary>Click to show details</summary>
+
+  <div id="markdownContent">
+
 ```
 │   .gitignore
 │   LICENSE
@@ -79,6 +87,10 @@ HUST
                 SurfacePanel.fxml
 ```
 
+  </div>
+</details>
+
+
 ## Member
 
 | Member            | Github        | 
@@ -97,8 +109,8 @@ HUST
 | [`model/object/Cylinder`](sourcecode/src/model/object/Cylinder.java)  | `100%` |
 | [`model/force/ForceSimulation`](sourcecode/src/model/force/AppliedForce.java)  | `25%` |
 | [`controller/AnimationController`](sourcecode/src/controller/AnimationController.java)  | `70%` |
-| [`controller/DragDropController`](sourcecode/src/controller/DragDropController.java)  | `80%` |
-| [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `70%` |
+| [`controller/DragDropController`](sourcecode/src/controller/DragDropController.java)  | `50%` |
+| [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `50%` |
 | [`controller/WelcomePage.java`](sourcecode/src/controller/WelcomePage.java)  | `100%` |
 | [`view/MainSimulation.fxml`](sourcecode/src/view/MainSimulation.fxml)  | `100%` |
 | [`view/Welcome.fxml`](sourcecode/src/view/Welcome.fxml)  | `100%` |
@@ -110,8 +122,8 @@ HUST
 | [`model/object/Cube`](sourcecode/src/model/object/Cube.java) | `100%` |
 | [`model/surface`](sourcecode/src/model/surface/Surface.java) | `100%` |
 | [`controller/AnimationController`](sourcecode/src/controller/AnimationController.java) | `30%` |
-| [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java) | `30%` |
-| [`controller/StatisticController`](sourcecode/src/controller/StatisticController.java) | `100%` |
+| [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java) | `25%` |
+| [`controller/StatisticController`](sourcecode/src/controller/StatisticController.java) | `50%` |
 | [`controller/CheckboxController`](sourcecode/src/controller/CheckboxController.java) | `100%` |
 | [`controller/SurfaceController`](sourcecode/src/controller/SurfaceController.java) | `100%` |
 | [`view/StatsPanel`](sourcecode/src/view/StatsPanel.fxml) | `100%` |
@@ -125,13 +137,14 @@ HUST
 | [`model/force/ForceSimulation`](sourcecode/src/model/force/AppliedForce.java) | `75%` |
 | [`model/force/FrictionForce`](sourcecode/src/model/force/AppliedForce.java) | `100%` |
 | [`model/force/Vector`](sourcecode/src/model/force/AppliedForce.java) | `100%` |
-| [`controller/forceController`](sourcecode/src/controller/ForceController.java) | `100%` |
+| [`controller/MainSimulationController`](sourcecode/src/controller/MainSimulationController.java)  | `25%` |
 | [`view/ForcePanel.fxml`](sourcecode/src/view/ForcePanel.fxml)| `50%` |
 ## 4. Hoang Thanh Dat
 |Work |Contribute |
 | :--               |    :---       |
 | [`Design`]() | `25%` |
-| [`controller/DragDropController`](sourcecode/src/controller/DragDropController.java) | `20%` |
-| [`controller/StatisticController`](sourcecode/src/controller/StatisticController.java) | `20%` |
+| [`controller/DragDropController`](sourcecode/src/controller/DragDropController.java) | `50%` |
+| [`controller/StatisticController`](sourcecode/src/controller/StatisticController.java) | `50%` |
 | [`demo`]() | `100%` |
 | [`report`]() | `100%` |
+| [`presentation`]() | `100%` |
